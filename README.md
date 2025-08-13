@@ -103,10 +103,10 @@ The executable will be created at `dist\simc_top_gear.exe` - this is a completel
 
 ### Step 1: Generate SimulationCraft String with Great Vault Options
 
-1. **In SimulationCraft**:
-   - Import your character normally
-   - Go to **Options** → **Great Vault** 
-   - Select your current vault options
+1. **In World of Warcraft**:
+   - Log into your character normally
+   - Open the **Great Vault**
+   - Go to **SimulationCraft (Addon)** → **Export SimC String** 
    - Copy the generated SimulationCraft string (it will include vault options as comments)
 
 ### Step 2: Import into TopGear
