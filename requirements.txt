@@ -1,0 +1,8 @@
+# Qt5 GUI Framework - More stable for PyInstaller builds
+PyQt5==5.15.9
+
+# PyInstaller for building executables - Stable version for Python 3.11
+pyinstaller==5.13.2
+
+# Standard library dependencies (these come with Python but listing for clarity)
+# os, sys, re, json, time, subprocess are built-in modules
