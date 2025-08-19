@@ -122,9 +122,9 @@ def write_simc_string_to_file(simc_string, input_filename):
     try:
         with open(input_filename, "w", encoding="utf-8") as f:
             f.write(simc_string)
-        print(f"✅ Successfully wrote SimC string to {input_filename}")
+        print(f"Successfully wrote SimC string to {input_filename}")
     except Exception as e:
-        print(f"❌ Error writing to file: {e}")
+        print(f"Error writing to file: {e}")
 
 def define_start_end_wr_from_string(simc_string):
     """Identify the start and end indices of the Weekly Reward Choices section from a string."""
