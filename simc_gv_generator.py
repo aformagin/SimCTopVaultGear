@@ -110,7 +110,9 @@ def generate_mod_simc_file(reward_items, simc_import, start_idx, end_idx):
                     modified_simc[i] = "# " + modified_simc[i].lstrip("# ").strip() + "\n"  # Keep others commented
 
         # Save to file with item name
-        filename = f"{output_dir}/{item_name.replace(' ', '_')}.simc"
+        # Clean filename by removing invalid Windows characters
+        clean_name = item_name.replace(' ', '_').replace(':', '_').replace('<', '_').replace('>', '_').replace('"', '_').replace('|', '_').replace('?', '_').replace('*', '_').replace('/', '_').replace('\\', '_')
+        filename = f"{output_dir}/{clean_name}.simc"
         with open(filename, "w") as f:
             f.writelines(modified_simc)
 

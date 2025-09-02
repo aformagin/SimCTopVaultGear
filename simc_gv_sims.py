@@ -22,6 +22,8 @@ def find_simc_executable():
     
     # Search locations in order of preference
     search_locations = [
+        os.path.join(script_dir, "simc"),  # simc subfolder in script directory
+        os.path.join(os.getcwd(), "simc"),  # simc subfolder in current working directory
         script_dir,  # Same directory as the application
         os.getcwd(),  # Current working directory
     ]
