@@ -115,17 +115,21 @@ def run_simc_against_vault():
             dps_results.append((item_name, dps_mean, dps_min, dps_max))
             print(f"Processed: {item_name} -> Mean DPS: {dps_mean}")
 
-    # Determine highest mean DPS item
-    if dps_results:
-        best_item = max(dps_results, key=lambda x: x[1])  # Sort by mean DPS
-        print(best_item)
-        return best_item
-    else:
-        print("No valid DPS data was found.")
-
     end = time.time()
-    elapsed = end - start
-    print(f"All simulations took: {elapsed}")
+    print(f"All simulations took: {end - start:.2f}s")
+
+    if not dps_results:
+        print("No valid DPS data was found.")
+        return (None, [])
+
+    # Sort all results greatest-to-least mean DPS
+    all_sorted = sorted(dps_results, key=lambda x: x[1], reverse=True)
+
+    # Best item is the top non-baseline result
+    non_baseline = [r for r in all_sorted if r[0] != "Baseline"]
+    best_item = non_baseline[0] if non_baseline else all_sorted[0]
+    print(best_item)
+    return (best_item, all_sorted)
 
 def extract_json_data(data):
      # Extract DPS statistics from sim.players[0].dps

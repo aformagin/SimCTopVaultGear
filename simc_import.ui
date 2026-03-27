@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>482</width>
-    <height>437</height>
+    <height>455</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,13 +22,13 @@
   <property name="minimumSize">
    <size>
     <width>482</width>
-    <height>437</height>
+    <height>455</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>482</width>
-    <height>437</height>
+    <height>455</height>
    </size>
   </property>
   <property name="font">
@@ -268,7 +268,20 @@ border-radius: 5px;}
 </string>
      </property>
      <property name="text">
-      <string>Gather Vault Gear</string>
+      <string>Gather Gear</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="includeBagsCheckBox">
+     <property name="geometry">
+      <rect>
+       <x>157</x>
+       <y>241</y>
+       <width>90</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Bag Items</string>
      </property>
     </widget>
     <widget class="QPushButton" name="removeItemBtn">
@@ -294,6 +307,29 @@ border-radius: 5px;}
       <string>Remove Item</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="clearItemsBtn">
+     <property name="geometry">
+      <rect>
+       <x>348</x>
+       <y>240</y>
+       <width>101</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {color: white;
+background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(25, 0, 0, 255));
+border-radius: 5px;}
+QPushButton:hover:pressed {color: red;
+background:qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(255, 0, 0, 255), stop:1 rgba(25, 0, 0, 255));
+border-radius: 5px;}
+
+</string>
+     </property>
+     <property name="text">
+      <string>Clear Items</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="resultsGroupBox">
     <property name="geometry">
@@ -301,7 +337,7 @@ border-radius: 5px;}
       <x>19</x>
       <y>280</y>
       <width>441</width>
-      <height>101</height>
+      <height>120</height>
      </rect>
     </property>
     <property name="font">
@@ -431,12 +467,49 @@ background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(255, 
       </item>
      </layout>
     </widget>
+    <widget class="QPushButton" name="detailsBtn">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>87</y>
+       <width>180</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Roboto</family>
+       <pointsize>9</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {color: white;
+background:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(0, 120, 215, 255), stop:1 rgba(0, 40, 100, 255));
+border-radius: 5px;}
+QPushButton:disabled {color: #888;
+background: #444;
+border-radius: 5px;}
+QPushButton:hover:pressed {color: white;
+background:qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:1, stop:0 rgba(0, 40, 100, 255), stop:1 rgba(0, 40, 100, 255));
+border-radius: 5px;}
+
+</string>
+     </property>
+     <property name="text">
+      <string>DPS Details</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="runSimBtn">
     <property name="geometry">
      <rect>
       <x>170</x>
-      <y>390</y>
+      <y>408</y>
       <width>141</width>
       <height>30</height>
      </rect>
