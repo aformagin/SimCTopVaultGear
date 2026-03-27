@@ -15,6 +15,106 @@ def resource_path(relative_path):
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+DARK_STYLESHEET = """
+    QWidget { background-color: #1a1a1a; color: #d8d8d8; }
+    QWidget#centralwidget { border: 1px solid #2e2e2e; }
+    QGroupBox {
+        color: #c0c0c0;
+        border: 1px solid #272727;
+        border-radius: 6px;
+        margin-top: 10px;
+        padding: 6px 4px 4px 4px;
+    }
+    QGroupBox::title {
+        subcontrol-origin: margin;
+        subcontrol-position: top left;
+        color: #c0c0c0;
+        padding: 0 6px;
+        background: #1a1a1a;
+    }
+    QCheckBox { color: #b8b8b8; background: transparent; }
+    QCheckBox::indicator {
+        width: 13px; height: 13px;
+        border: 1px solid #484848;
+        border-radius: 3px;
+        background: #222222;
+    }
+    QCheckBox::indicator:checked {
+        background: #7a1515;
+        border-color: #9e2020;
+    }
+    QCheckBox::indicator:hover { border-color: #666666; }
+    QLineEdit {
+        background: #222222;
+        color: #d8d8d8;
+        border: 1px solid #333333;
+        border-radius: 4px;
+        padding: 2px 6px;
+    }
+    QLineEdit:focus { border-color: #505050; }
+    QTextEdit {
+        background: #222222;
+        color: #c0c0c0;
+        border: 1px solid #333333;
+        border-radius: 4px;
+        selection-background-color: #1e3a6a;
+    }
+    QListWidget {
+        background: #222222;
+        color: #c0c0c0;
+        border: 1px solid #333333;
+        border-radius: 4px;
+        outline: none;
+    }
+    QListWidget::item { padding: 3px 6px; border-radius: 2px; }
+    QListWidget::item:selected { background: #1e3050; color: #e0e0e0; }
+    QListWidget::item:hover:!selected { background: #272727; }
+    QScrollBar:vertical {
+        background: #1a1a1a;
+        width: 6px;
+        border-radius: 3px;
+        margin: 0;
+    }
+    QScrollBar::handle:vertical {
+        background: #3a3a3a;
+        border-radius: 3px;
+        min-height: 24px;
+    }
+    QScrollBar::handle:vertical:hover { background: #555555; }
+    QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0; }
+    QScrollBar:horizontal {
+        background: #1a1a1a;
+        height: 6px;
+        border-radius: 3px;
+        margin: 0;
+    }
+    QScrollBar::handle:horizontal {
+        background: #3a3a3a;
+        border-radius: 3px;
+        min-width: 24px;
+    }
+    QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal { width: 0; }
+    QDialog { background: #1a1a1a; border: 1px solid #2e2e2e; }
+    QTableWidget {
+        background: #1e1e1e;
+        color: #d8d8d8;
+        gridline-color: #2a2a2a;
+        border: 1px solid #2a2a2a;
+        border-radius: 4px;
+    }
+    QHeaderView::section {
+        background: #222222;
+        color: #888888;
+        border: none;
+        border-bottom: 1px solid #2e2e2e;
+        border-right: 1px solid #2e2e2e;
+        padding: 5px 8px;
+        font-weight: bold;
+    }
+    QTableWidget::item:selected { background: #1e3a6a; color: #ffffff; }
+    QLabel { background: transparent; }
+"""
+
 class MainWindow(QtWidgets.QMainWindow):
     rewards = []
     simc_import = ""
@@ -25,13 +125,28 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__(*args, **kwargs)
         ui_file = resource_path("simc_import.ui")
         uic.loadUi(ui_file, self)
+        QtWidgets.QApplication.instance().setStyleSheet(DARK_STYLESHEET)
+        self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+        self._drag_pos = None
         self.gatherVaultBtn.clicked.connect(self.on_gather_vault_click)
         self.removeItemBtn.clicked.connect(self.remove_vault_item)
         self.clearItemsBtn.clicked.connect(self.clear_vault_items)
         self.runSimBtn.clicked.connect(self.run_sim)
         self.detailsBtn.clicked.connect(self.show_dps_details)
         self.detailsBtn.setIcon(self.style().standardIcon(QtWidgets.QStyle.SP_MessageBoxInformation))
+        self.exitBtn.clicked.connect(self.close)
         self.threadpool = QThreadPool()  # Initialize thread pool
+
+    def mousePressEvent(self, event):
+        if event.button() == QtCore.Qt.LeftButton:
+            self._drag_pos = event.globalPos() - self.frameGeometry().topLeft()
+
+    def mouseMoveEvent(self, event):
+        if event.buttons() == QtCore.Qt.LeftButton and self._drag_pos is not None:
+            self.move(event.globalPos() - self._drag_pos)
+
+    def mouseReleaseEvent(self, event):
+        self._drag_pos = None
 
     def run_sim(self):
         """Runs SimC in a separate thread to keep the UI responsive."""
@@ -40,6 +155,8 @@ class MainWindow(QtWidgets.QMainWindow):
             return
 
         self.bestItemLine.setText("Running Sim...")
+        self.runSimBtn.setEnabled(False)
+        self.exitBtn.setEnabled(False)
 
         # Create worker and connect signals
         worker = SimWorker(self.rewards, self.simc_import)
@@ -56,6 +173,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self.estDPSLine.setText(f"{'%.2f' % best_item[1]}")
         self.all_dps_results = all_results
         self.detailsBtn.setEnabled(True)
+        self.runSimBtn.setEnabled(True)
+        self.exitBtn.setEnabled(True)
 
     def show_dps_details(self):
         """Opens a window listing every simmed item's mean DPS, greatest to least,
