@@ -1,0 +1,146 @@
+# Gotmilkferya - Balance - 2026-04-11 12:02 - US/Dalaran
+# SimC Addon 12.0.1-04
+# WoW 12.0.1.66838, TOC 120001
+# Requires SimulationCraft 1000-01 or newer
+
+druid="Gotmilkferya"
+level=90
+race=tauren
+region=us
+server=dalaran
+role=spell
+professions=herbalism=105/skinning=100
+spec=balance
+# loot_spec=balance
+
+talents=CYGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAAAAAAWoMbNjxMDwsMzMzMLMgxMLzsYmZmlxyMLjZGshhBYssNzgxsNCMBAAAYhZmZGsZMjxAAwMDMA
+
+# Saved Loadout: PVP
+# talents=CYGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAAAAAAWAziZMmZgHwsZmZmZjBMLzsMjZmZGjFzyMzMDLYAwAstN2wYmZZAAAAwmZmZMYzYGjBgZGAYA
+# Saved Loadout: Raid ST 12.0.1
+# talents=CYGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAAAAAAWAzmZMmZgxsMzMzMgZYWmZbYGzYjlZWmZmhZBDAGgltxGGzMLDAAAA2YmZmBbGYMDgZGAYA
+# Saved Loadout: Raid Cleave
+# talents=CYGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAAAAAAWAzmhxMDMmFzMzMLMgZZmlxyMzMzGLzsMmZwGGGgBYZbshxMzyAAAAgNzMzMD2MMGDAzMAwA
+# Saved Loadout: IV M+ 12.0.1
+# talents=CYGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAAAAAAWAzmZMmZAmlZmZmZhBMmZZmFzMzsMWmZZMzgNMMAjltZGMmtBwAAAAwCzMzMYzYGjBAgZGYA
+# Saved Loadout: Raid
+# talents=CYGA8cL7tpvige+kkmGM9zUPWDAAAAAAAAAAAAAAAAWAzmZMmZgxsMzMzMADzyMbDzMzYjlZWmZMMLYAwAssN2wYmZZAAAAwmZmZmBbGDjZAMzAADA
+
+# Branches of the Luminous Bloom (269)
+head=,id=250024,enchant_id=8016,bonus_id=13334/6652/12667/12796/13338/13575/3154
+# Novice Combatant's Necklace (269)
+neck=,id=266314,gem_id=240892,bonus_id=13447/12796
+# Seedpods of the Luminous Bloom (272)
+shoulder=,id=250022,enchant_id=8001,bonus_id=13334/6652/13340/13574/12797
+# Imperator's Banner (263)
+back=,id=249335,bonus_id=6652/13577/13334/12794
+# Trunk of the Luminous Bloom (269)
+chest=,id=250027,enchant_id=7987,bonus_id=6652/13440/13336/13575/12796
+# Loamm Niffen Tabard (1)
+tabard=,id=205286
+# Void-Skinned Bracers (269)
+wrist=,id=249327,bonus_id=6652/12667/13577/13334/12796
+# Vaelgor's Fearsome Grasp (266)
+hands=,id=249321,bonus_id=6652/13577/13334/12795
+# Twisted Twilight Sash (269)
+waist=,id=249314,bonus_id=6652/12667/13577/13334/12796
+# Phloemwraps of the Luminous Bloom (256)
+legs=,id=250023,enchant_id=7934,bonus_id=6652/13439/13339/13575/12788
+# Void-Claimed Shinkickers (266)
+feet=,id=249334,bonus_id=6652/13577/13334/12795
+# Platinum Star Band (266)
+finger1=,id=193708,enchant_id=7969,gem_id=240983,bonus_id=12795/13440/6652/13668/12699
+# Band of the Triumvirate (256)
+finger2=,id=151311,enchant_id=7968,gem_id=240891,bonus_id=13439/6652/13668/12699/12788
+# Gaze of the Alnseer (266)
+trinket1=,id=249343,bonus_id=6652/13334/12795
+# Glorious Crusader's Keepsake (269)
+trinket2=,id=251792,bonus_id=6652/12796
+# Corespark Multitool (276)
+main_hand=,id=251201,enchant_id=8039,bonus_id=13440/40/12701/12798
+
+### Gear from Bags
+#
+# Voidlashed Hood (263)
+# head=,id=151336,bonus_id=12794/13440/6652/13534/13577/12699
+#
+# Amani Heartstring Pendant (246)
+# neck=,id=265739,gem_id=240891,bonus_id=12785/6652/13668
+#
+# Osseoclad Paledrape (237)
+# back=,id=249624,bonus_id=12778/41/11215/13577
+#
+# Reshii Wraps (170)
+# back=,id=235499,enchant_id=7403,gem_id=238037,bonus_id=12401/9893/12255
+#
+# Novice Combatant's Cloak (217)
+# back=,id=267491,bonus_id=13629/13447
+#
+# Maledict Vest (263)
+# chest=,id=251216,bonus_id=12794/13440/6652/13577/12699
+#
+# Trunk of the Luminous Bloom (263)
+# chest=,id=250027,enchant_id=7986,bonus_id=13336/13439/6652/13575/12790
+#
+# Fallen King's Cuffs (263)
+# wrist=,id=249304,bonus_id=6652/12667/13577/13334/12794
+#
+# Stonecarved Smashers (220)
+# hands=,id=264584,bonus_id=12769/6652/13578/11311
+#
+# Ruby Contestant's Gloves (263)
+# hands=,id=193721,bonus_id=13439/6652/13577/12699/12790
+#
+# Hara'ti Defender's Cord (263)
+# waist=,id=263267,bonus_id=13577/12790
+#
+# Slippers of the Midnight Flame (253)
+# feet=,id=249305,bonus_id=6652/13577/13333/12787/11215
+#
+# Domanaar's Dire Treads (246)
+# feet=,id=251121,bonus_id=12785/13439/42/13577/12699
+#
+# Void-Gorged Kickers (220)
+# feet=,id=264569,bonus_id=12769/6652/13578/11311
+#
+# Noble's Signet Ring (1)
+# finger1=,id=265814,bonus_id=13639
+#
+# Platinum Star Band (256)
+# finger1=,id=193708,enchant_id=7968,gem_id=240982,bonus_id=13439/6652/13668/12699/12788
+#
+# Novice Combatant's Insignia of Alacrity (201)
+# trinket1=,id=267469,bonus_id=13644/13451
+#
+# Lost Idol of the Hash'ey (220)
+# trinket1=,id=251783,bonus_id=42/12769/6652/11311
+#
+# Eye of the Drowning Void (253)
+# trinket1=,id=250257,bonus_id=12787/6652/12699/11215
+#
+# Novice Combatant's Medallion (201)
+# trinket1=,id=267076,bonus_id=13644/13451
+#
+# Purification Staff of the Quickblade (25)
+# main_hand=,id=25333,bonus_id=6655/1677,drop_level=30
+#
+# Alnscorned Spire (250)
+# main_hand=,id=249278,bonus_id=6652/13333/12786
+#
+# Belo'melorn, the Shattered Talon (256)
+# main_hand=,id=249283,bonus_id=6652/13333/12788/11215
+#
+# Simple Dagger (3)
+# main_hand=,id=4565
+
+### Additional Character Info
+#
+# catalyst_currencies=3269:8/3378:0/2813:8/3116:8
+#
+# upgrade_currencies=c:3347:116/c:3383:524/c:1813:2530/c:3341:120/c:3343:61/c:1792:6708/c:1931:2717/c:2122:11/c:3345:20/i:256608:9/i:228338:3/i:230906:2/i:224072:1/i:232875:6/i:256559:9/i:230936:1/i:211296:1
+#
+# slot_high_watermarks=0:269:269/1:269:269/2:272:272/3:269:269/4:269:269/5:256:256/6:266:266/7:269:269/8:266:266/9:256:256/10:266:266/11:263:263/12:276:276/13:263:263/14:0:256/15:0:159/16:263:263
+#
+# upgrade_achievements=40107/40115/40942/40943/40944/41886/41887/41888/42767/61809
+
+# Checksum: 8d75f992

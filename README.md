@@ -1,217 +1,147 @@
-# TopGear - SimulationCraft Great Vault Optimizer
+# SimC Top Gear — WoW Gear Optimizer
 
-TopGear is a PyQt5-based GUI application that helps World of Warcraft players optimize their Great Vault reward choices using SimulationCraft simulation data. The application automatically generates and runs SimulationCraft scenarios for each vault reward option to determine which item provides the highest DPS increase.
+A PyQt5 desktop app that uses SimulationCraft to help World of Warcraft players optimize their gear choices. Paste your SimC addon export string once and use any of the three simulation tabs.
 
-## Features
+## Tabs Overview
 
-- **Great Vault Integration**: Import your character's SimulationCraft string with embedded Great Vault options
-- **Automated Simulation**: Automatically generates separate SimulationCraft files for each vault reward
-- **Multi-threaded Processing**: Runs simulations in background threads to keep the UI responsive  
-- **DPS Comparison**: Calculates and compares mean DPS for each vault option
-- **Best Item Recommendation**: Identifies which vault reward provides the highest DPS gain
-- **Item Management**: Add/remove vault items from consideration before running simulations
+### Great Vault
+Picks the best item from your weekly Great Vault choices.
+
+- Parses vault reward options from your SimC export string (`### Weekly Reward Choices`)
+- Optionally includes bag items alongside vault rewards
+- Runs one simulation per candidate item and compares mean DPS
+- Reports the best choice and a full DPS breakdown
+
+**When to use**: On reset day when you need to pick one of your three vault slots.
+
+---
+
+### Drop Finder
+Identifies which dungeons and raids are worth running for your character (Droptimizer-style).
+
+- Pulls loot tables from `data/drop_sources.json` (generated from the Blizzard Game Data API)
+- Select a source type (M+ Dungeons or Raids), a specific instance, a boss (or all bosses), and an item level track (Champion / Hero / Myth for dungeons; LFR / Normal / Heroic / Mythic for raids)
+- Items are automatically filtered to your character's class based on your parsed SimC string
+- Each item is simulated independently — one profileset per item — against your current equipped gear
+- Results are ranked by DPS gain, showing which drops are the biggest upgrades
+
+**When to use**: Deciding which dungeon key or raid difficulty to run this week to maximize your chances of a meaningful upgrade.
+
+---
+
+### Top Gear
+Finds the single best gear loadout from items already in your bags.
+
+- Loads bag items from your SimC export string (`### Gear from Bags`)
+- Simulates every combination of selected bag items across all slots simultaneously (Cartesian product)
+- Accounts for interactions between items — e.g., whether ring A is better paired with trinket B vs. trinket A
+- Shows a combination count before you run so you can deselect items if the number is too large
+- Results are ranked combinations, not individual items
+
+**When to use**: You have several unequipped items and want to know the globally optimal loadout, not just which single item is the biggest upgrade in isolation.
+
+---
+
+## Key Difference: Drop Finder vs. Top Gear
+
+| | Drop Finder | Top Gear |
+|---|---|---|
+| **Item source** | Loot tables (hypothetical drops) | Your actual bag items |
+| **Sim approach** | One profileset per item (independent) | Cartesian product of all alternatives |
+| **Answers** | "What should I farm?" | "What should I equip?" |
+| **Scale** | Scales linearly with item count | Scales exponentially — watch the combination counter |
+
+---
 
 ## Prerequisites
 
-- **Python 3.11+** (recommended) or Python 3.12
-- **SimulationCraft**: Download from [simulationcraft.org](https://www.simulationcraft.org/)
-  - TopGear will automatically find SimulationCraft in the following locations (in order):
-    1. Same directory as TopGear executable/script
-    2. Current working directory
-    3. System PATH environment variable
-  - Supported executable names: `simc.exe`
+- **Python 3.11+**
+- **SimulationCraft** — download from [simulationcraft.org](https://www.simulationcraft.org/)
+  - The app searches for `simc.exe` in: the project directory → current directory → system PATH
+- **SimC Addon** — export your character string from the in-game SimulationCraft addon
 
-## Project Structure
-
-```
-TopGear/
-├── simc_top_gear.py          # Main GUI application
-├── simc_gv_generator.py      # Great Vault reward parser and file generator  
-├── simc_gv_sims.py          # SimulationCraft execution and results processing
-├── simc_import.ui           # Qt Designer UI file
-├── requirements.txt         # Python dependencies
-├── setup_venv.ps1          # Virtual environment setup (PowerShell)
-├── setup_venv.bat          # Virtual environment setup (Batch)
-├── build.ps1               # Build executable (PowerShell) 
-├── build.bat               # Build executable (Batch)
-├── simc_top_gear.spec      # PyInstaller configuration
-└── README.md               # This file
-```
-
-## Setup Instructions
-
-### Option 1: PowerShell (Recommended for Windows)
-
-1. **Clone or download** this project to your desired location
-2. **Open PowerShell** in the project directory
-3. **Run the setup script**:
-   ```powershell
-   .\setup_venv.ps1
-   ```
-
-### Option 2: Command Prompt/Batch
-
-1. **Clone or download** this project to your desired location  
-2. **Open Command Prompt** in the project directory
-3. **Run the setup script**:
-   ```cmd
-   setup_venv.bat
-   ```
-
-### What the setup script does:
-
-- Verifies Python 3.11+ installation
-- Creates a fresh virtual environment in `./venv/`
-- Installs PyQt5 5.15.9 and PyInstaller 5.13.2
-- Verifies the installation works correctly
-
-## Running the Application
-
-### During Development
-
-After running the setup script, you can run the application directly:
+## Setup
 
 **PowerShell:**
+```powershell
+.\setup_venv.ps1
+```
+
+**Command Prompt:**
+```cmd
+setup_venv.bat
+```
+
+The setup script creates a virtual environment in `./venv/` and installs all dependencies.
+
+## Running
+
 ```powershell
 .\venv\Scripts\Activate.ps1
 python simc_top_gear.py
 ```
 
-**Command Prompt:**
-```cmd
-venv\Scripts\activate.bat
-python simc_top_gear.py
-```
+## Building a Standalone Executable
 
-### Building a Standalone Executable
-
-To create a single-file executable that doesn't require Python to be installed:
-
-**PowerShell:**
 ```powershell
-.\build.ps1
+.\build.ps1   # or build.bat
 ```
 
-**Command Prompt:**
-```cmd
-build.bat
+Output: `dist\simc_top_gear.exe` — no Python installation required to run.
+
+## Project Structure
+
+```
+SimCTopVaultGear/
+├── simc_top_gear.py           # Main GUI (PyQt5)
+├── simc_gv_generator.py       # SimC string parser (ParsedItem, ParseResult)
+├── simc_gv_sims.py            # Legacy Great Vault simc runner
+├── profileset_generator.py    # Builds simc profileset input strings
+├── top_gear_engine.py         # Orchestrates parse → profilesets → simc → results
+├── result_parser.py           # Parses simc json2=stdout into SimResult objects
+├── drop_finder_engine.py      # Drop Finder: loads loot tables, filters, builds profilesets
+├── data/
+│   └── drop_sources.json      # Loot tables (instances, bosses, items, ilvl tracks)
+├── scripts/
+│   └── generate_drop_sources.py  # Regenerate drop_sources.json via Blizzard API
+├── tests/                     # pytest test suite (161 tests)
+├── requirements.txt
+├── setup_venv.ps1 / .bat
+├── build.ps1 / .bat
+└── simc_top_gear.spec
 ```
 
-The executable will be created at `dist\simc_top_gear.exe` - this is a completely self-contained file that can be run anywhere.
+## Regenerating Loot Tables
 
-## How to Use TopGear
+`data/drop_sources.json` is bundled and ready to use. To regenerate it at the start of a new season:
 
-### Step 1: Generate SimulationCraft String with Great Vault Options
+1. Create `blizz_api.json` in the project root:
+   ```json
+   {"client-id": "your_id", "client-secret": "your_secret"}
+   ```
+   Get credentials at [develop.battle.net](https://develop.battle.net/).
 
-1. **In World of Warcraft**:
-   - Log into your character normally
-   - Open the **Great Vault**
-   - Go to **SimulationCraft (Addon)** → **Export SimC String** 
-   - Copy the generated SimulationCraft string (it will include vault options as comments)
+2. Run:
+   ```
+   python scripts/generate_drop_sources.py
+   ```
 
-### Step 2: Import into TopGear
-
-1. **Launch TopGear** (`python simc_top_gear.py` or run the built executable)
-2. **Paste your SimulationCraft string** into the large text area
-3. **Click "Gather Vault Rewards"** to parse vault options from the string
-4. **Review the detected vault items** in the list
-
-### Step 3: Run Simulations
-
-1. **(Optional) Remove unwanted items** using the "Remove Item" button
-2. **Click "Run Sim"** to start the simulation process
-3. **Wait for completion** - the status will show "Running Sim..." during processing
-4. **View results** - the best item and estimated DPS will be displayed
-
-### Step 4: Make Your Choice
-
-- The application will show which vault reward provides the highest mean DPS
-- Use this information to make an informed decision about your Great Vault selection
-
-## Technical Details
-
-### Dependencies
-
-- **PyQt5 5.15.9**: GUI framework for cross-platform desktop applications
-- **PyInstaller 5.13.2**: Creates standalone executables from Python applications
-
-### Architecture
-
-- **Main Thread**: Handles GUI interactions and updates
-- **Worker Thread**: Executes SimulationCraft processes without blocking the UI
-- **File Processing**: Generates separate `.simc` files for each vault option in `simc_weekly_rewards_variants/`
-- **Results Parsing**: Extracts DPS statistics from SimulationCraft JSON output
-
-### Simulation Process
-
-1. Parses Great Vault options from SimulationCraft import string
-2. Creates individual `.simc` files with one vault option active per file
-3. Runs `simc.exe` on each file with JSON output enabled
-4. Extracts mean DPS values from each simulation result
-5. Identifies the vault option with the highest mean DPS
+This fetches current-season M+ dungeons and raid instances from the Blizzard Game Data API and downloads item metadata from Raidbots static files.
 
 ## Troubleshooting
 
-### "SimulationCraft executable not found"
-TopGear will automatically search for SimulationCraft in multiple locations. If you see this error:
+**"SimulationCraft executable not found"**
+Place `simc.exe` in the same directory as the project, or use the Browse button in the app to set the path manually.
 
-**Solution 1 - Place in same directory (Easiest)**:
-- Download SimulationCraft from [simulationcraft.org](https://www.simulationcraft.org/)
-- Extract `simc.exe` to the same directory as TopGear
+**"PyQt5 import failed" or DLL errors**
+Use Python 3.11. Reinstall with `pip uninstall PyQt5 && pip install PyQt5==5.15.9`.
 
-**Solution 2 - Add to PATH**:
-- Add the SimulationCraft installation directory to your system PATH environment variable
-- This allows TopGear to find it automatically
+**Too many combinations in Top Gear**
+Use the "None" button to deselect all, then manually check only the items you want to compare. The combination counter updates live.
 
-**Solution 3 - Run from SimulationCraft directory**:
-- Copy TopGear to your SimulationCraft installation directory
-- Run TopGear from there
-
-### "PyQt5 import failed" or DLL errors
-- Ensure you're using Python 3.11 (most compatible version)
-- Try reinstalling: `pip uninstall PyQt5` then `pip install PyQt5==5.15.9`
-- On some systems, you may need Visual C++ Redistributables from Microsoft
-
-### "Virtual environment creation failed"  
-- Ensure Python is properly installed and added to PATH
-- Try running: `python -m pip install --upgrade pip`
-- Restart your terminal/command prompt after Python installation
-
-### Application crashes or won't start
-- Check that `simc_import.ui` file is present in the same directory
-- Verify all Python files are in the same directory
-- Try running from command line to see error messages
-
-## SimulationCraft Integration
-
-This application requires SimulationCraft to function. Make sure you have:
-
-1. **Downloaded SimulationCraft** from the official website
-2. **Extracted simc.exe** to your TopGear directory or system PATH  
-3. **Generated a proper SimulationCraft string** with Great Vault options included
-
-The Great Vault options should appear as commented sections in your SimulationCraft string like:
-
-```
-### Weekly Reward Choices ###
-# Item Name (Item Level)
-# slot=waist,id=12345,bonus_id=1234/5678,...
-### End of Weekly Reward Choices ###
-```
-
-## Contributing
-
-This project was created to help World of Warcraft players make informed Great Vault decisions. If you encounter bugs or have feature requests, please provide detailed information about:
-
-- Your Python version
-- Your SimulationCraft version  
-- The error message or unexpected behavior
-- Steps to reproduce the issue
-
-## License
-
-This project is provided as-is for educational and personal use. SimulationCraft is a separate project with its own licensing terms.
+**Drop Finder shows no items**
+Click "Refresh Items" after pasting your SimC string — the item list filters to your character's class automatically once the string is parsed.
 
 ---
 
-**Note**: This application is not affiliated with Blizzard Entertainment or the SimulationCraft project. World of Warcraft is a trademark of Blizzard Entertainment.
+*Not affiliated with Blizzard Entertainment or the SimulationCraft project. World of Warcraft is a trademark of Blizzard Entertainment.*

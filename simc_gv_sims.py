@@ -54,14 +54,13 @@ output_json = "data.json"
 # List to store DPS results
 dps_results = []
 
-# Check if simc.exe exists
+# Warn if simc.exe is not found (do not exit — the GUI will handle this gracefully)
 if not simc_executable:
-    print("Error: SimulationCraft executable not found!")
+    print("Warning: SimulationCraft executable not found at startup.")
     print("Please ensure simc.exe or SimulationCraft.exe is:")
     print("  1. In the same directory as this application")
     print("  2. In your system PATH")
     print("  3. Download from: https://www.simulationcraft.org/")
-    exit(1)
 
 def run_simc_against_vault():
     dps_results.clear()
