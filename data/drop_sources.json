@@ -1,0 +1,5363 @@
+{
+  "generated_at": "2026-04-11",
+  "season": "Midnight Season 1",
+  "instances": [
+    {
+      "id": 1201,
+      "name": "Algeth'ar Academy",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 2509,
+          "name": "Vexamus",
+          "items": [
+            {
+              "id": 193710,
+              "name": "Spellboon Saber",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 193708,
+              "name": "Platinum Star Band",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 193709,
+              "name": "Vexamus' Expulsion Rod",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 193711,
+              "name": "Spellbane Cutlass",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 258529,
+              "name": "Arcaneclaw Spear",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2512,
+          "name": "Overgrown Ancient",
+          "items": [
+            {
+              "id": 193713,
+              "name": "Experimental Safety Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 193715,
+              "name": "Boots of Explosive Growth",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 193716,
+              "name": "Algeth'ar Hedgecleaver",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 193712,
+              "name": "Potion-Stained Cloak",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 193717,
+              "name": "Mystakria's Harvester",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 193714,
+              "name": "Frenzyroot Cuffs",
+              "slot": "wrist",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2495,
+          "name": "Crawth",
+          "items": [
+            {
+              "id": 193720,
+              "name": "Bronze Challenger's Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 193718,
+              "name": "Emerald Coach's Whistle",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 193723,
+              "name": "Obsidian Goaltending Spire",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 193721,
+              "name": "Ruby Contestant's Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 193722,
+              "name": "Azure Belt of Competition",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 193719,
+              "name": "Dragon Games Equipment",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 258531,
+              "name": "Crawth's Scaleguard",
+              "slot": "off_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2514,
+          "name": "Echo of Doragosa",
+          "items": [
+            {
+              "id": 193701,
+              "name": "Algeth'ar Puzzle Box",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 193707,
+              "name": "Final Grade",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 193703,
+              "name": "Organized Pontificator's Mask",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 193704,
+              "name": "Scaled Commencement Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 193705,
+              "name": "Breastplate of Proven Knowledge",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 193706,
+              "name": "Venerated Professor's Greaves",
+              "slot": "legs",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1300,
+      "name": "Magisters' Terrace",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 2659,
+          "name": "Arcanotron Custos",
+          "items": [
+            {
+              "id": 250246,
+              "name": "Refueling Orb",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251102,
+              "name": "Clasp of Compliance",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 251103,
+              "name": "Custodial Cuffs",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 251104,
+              "name": "Leggings of Orderly Conduct",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251101,
+              "name": "Arcane Guardian's Shell",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 251100,
+              "name": "Malfeasance Mallet",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2661,
+          "name": "Seranel Sunlash",
+          "items": [
+            {
+              "id": 251108,
+              "name": "Wraps of Watchful Wrath",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 251109,
+              "name": "Spellsnap Shadowmask",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 251110,
+              "name": "Sunlash's Sunsash",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 251107,
+              "name": "Oathsworn Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251105,
+              "name": "Ward of the Spellbreaker",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251106,
+              "name": "Resolute Runeglaive",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 260312,
+              "name": "Defiant Defender's Drape",
+              "slot": "back",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2660,
+          "name": "Gemellus",
+          "items": [
+            {
+              "id": 250242,
+              "name": "Jelly Replicator",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251115,
+              "name": "Bifurcation Band",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 251113,
+              "name": "Gloves of Viscous Goo",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 251114,
+              "name": "Voidwarped Oozemail",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 251112,
+              "name": "Shadowsplit Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 251111,
+              "name": "Splitshroud Stinger",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2662,
+          "name": "Degentrius",
+          "items": [
+            {
+              "id": 250257,
+              "name": "Eye of the Drowning Void",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251120,
+              "name": "Wraps of Umbral Descent",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 251121,
+              "name": "Domanaar's Dire Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251119,
+              "name": "Vortex Visage",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 251118,
+              "name": "Legplates of Lingering Dusk",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251117,
+              "name": "Whirling Voidcleaver",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251122,
+              "name": "Shadowslash Slicer",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1315,
+      "name": "Maisara Caverns",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 2810,
+          "name": "Muro'jin and Nekraxx",
+          "items": [
+            {
+              "id": 251167,
+              "name": "Nightprey Stalkers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251166,
+              "name": "Falconer's Cinch",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 263193,
+              "name": "Trollhunter's Bands",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 251162,
+              "name": "Traitor's Talon",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251176,
+              "name": "Reanimator's Weight",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251174,
+              "name": "Deceiver's Rotbow",
+              "slot": "ranged",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2811,
+          "name": "Vordaza",
+          "items": [
+            {
+              "id": 250223,
+              "name": "Soulcatcher's Charm",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251172,
+              "name": "Vilehex Bonds",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 251171,
+              "name": "Enthralled Bonespines",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251170,
+              "name": "Wickedweave Trousers",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251169,
+              "name": "Footwraps of Ill-Fate",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251161,
+              "name": "Shroud of the Soulhunter",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 251178,
+              "name": "Ceremonial Hexblade",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2812,
+          "name": "Rak'tul, Vessel of Souls",
+          "items": [
+            {
+              "id": 250258,
+              "name": "Vessel of Tortured Souls",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251177,
+              "name": "Fetid Vilecrown",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 251179,
+              "name": "Decaying Cuirass",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 251175,
+              "name": "Soulblight Cleaver",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251164,
+              "name": "Amalgamation's Harness",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251168,
+              "name": "Liferipper's Cutlass",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251163,
+              "name": "Berserker's Hexclaws",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1316,
+      "name": "Nexus-Point Xenas",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 2813,
+          "name": "Chief Corewright Kasreth",
+          "items": [
+            {
+              "id": 251205,
+              "name": "Leyline Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251206,
+              "name": "Fluxweave Cloak",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 251204,
+              "name": "Corewright's Zappers",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 251203,
+              "name": "Kasreth's Bindings",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 251202,
+              "name": "Reflux Reflector",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251201,
+              "name": "Corespark Multitool",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2814,
+          "name": "Corewarden Nysarra",
+          "items": [
+            {
+              "id": 250253,
+              "name": "Whisper of the Duskwraith",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251210,
+              "name": "Eclipse Espadrilles",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251209,
+              "name": "Corewarden Cuffs",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 251208,
+              "name": "Lightscarred Cuisses",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251207,
+              "name": "Dreadflail Bludgeon",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251213,
+              "name": "Nysarra's Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251093,
+              "name": "Omission of Light",
+              "slot": "finger1",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2815,
+          "name": "Lothraxion",
+          "items": [
+            {
+              "id": 250241,
+              "name": "Mark of Light",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251217,
+              "name": "Occlusion of Void",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 251216,
+              "name": "Maledict Vest",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 251215,
+              "name": "Greaves of the Divine Guile",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251212,
+              "name": "Radiant Slicer",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251157,
+              "name": "Searing Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251211,
+              "name": "Fractured Fingerguards",
+              "slot": "hands",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 278,
+      "name": "Pit of Saron",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 608,
+          "name": "Forgemaster Garfrost",
+          "items": [
+            {
+              "id": 49801,
+              "name": "Unspeakable Secret",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50234,
+              "name": "Shoulderplates of Frozen Blood",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 49806,
+              "name": "Flayer's Black Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 49803,
+              "name": "Ring of Carnelian and Bone",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 49802,
+              "name": "Garfrost's Two-Ton Hammer",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50227,
+              "name": "Surgeon's Needle",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50233,
+              "name": "Spurned Val'kyr Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 49804,
+              "name": "Polished Mirror Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 50230,
+              "name": "Malykriss Vambraces",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 50228,
+              "name": "Barbed Ymirheim Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 50229,
+              "name": "Legguards of the Frosty Depths",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49805,
+              "name": "Ice-Steeped Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 133486,
+              "name": "Garfrost's Two-Ton Hammer",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 133501,
+              "name": "Skeleton Lord's Cranium",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 133508,
+              "name": "Shroud of Rime",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 133490,
+              "name": "Flayer's Black Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 133489,
+              "name": "Ice-Steeped Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 133485,
+              "name": "Unspeakable Secret",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 133488,
+              "name": "Polished Mirror Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 133487,
+              "name": "Ring of Carnelian and Bone",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 49801,
+              "name": "Unspeakable Secret",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 49803,
+              "name": "Ring of Carnelian and Bone",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 49804,
+              "name": "Polished Mirror Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 50230,
+              "name": "Malykriss Vambraces",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 50229,
+              "name": "Legguards of the Frosty Depths",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 50234,
+              "name": "Shoulderplates of Frozen Blood",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 49806,
+              "name": "Flayer's Black Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 49802,
+              "name": "Garfrost's Two-Ton Hammer",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50227,
+              "name": "Surgeon's Needle",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50233,
+              "name": "Spurned Val'kyr Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 50228,
+              "name": "Barbed Ymirheim Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 49805,
+              "name": "Ice-Steeped Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 609,
+          "name": "Ick and Krick",
+          "items": [
+            {
+              "id": 50263,
+              "name": "Braid of Salt and Fire",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 50266,
+              "name": "Ancient Polar Bear Hide",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50235,
+              "name": "Ick's Rotting Thumb",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 50264,
+              "name": "Chewed Leather Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 50265,
+              "name": "Blackened Ghoul Skin Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49808,
+              "name": "Bent Gold Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 49810,
+              "name": "Scabrous Zombie Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 49809,
+              "name": "Wristguards of Subterranean Moss",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 49812,
+              "name": "Purloined Wedding Ring",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 49807,
+              "name": "Krick's Beetle Stabber",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 49811,
+              "name": "Black Dragonskin Breeches",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 133494,
+              "name": "Scabrous Zombie Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 133491,
+              "name": "Krick's Beetle Stabber",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 133496,
+              "name": "Purloined Wedding Ring",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 133492,
+              "name": "Bent Gold Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 133504,
+              "name": "Rimewoven Silks",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 133517,
+              "name": "Saronite-Studded Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 133493,
+              "name": "Wristguards of Subterranean Moss",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 133495,
+              "name": "Black Dragonskin Breeches",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 50263,
+              "name": "Braid of Salt and Fire",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 50266,
+              "name": "Ancient Polar Bear Hide",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50235,
+              "name": "Ick's Rotting Thumb",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 252421,
+              "name": "Rotting Globule",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 50264,
+              "name": "Chewed Leather Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 50265,
+              "name": "Blackened Ghoul Skin Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49808,
+              "name": "Bent Gold Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 49810,
+              "name": "Scabrous Zombie Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 49809,
+              "name": "Wristguards of Subterranean Moss",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 49812,
+              "name": "Purloined Wedding Ring",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 49807,
+              "name": "Krick's Beetle Stabber",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 49811,
+              "name": "Black Dragonskin Breeches",
+              "slot": "legs",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 610,
+          "name": "Scourgelord Tyrannus",
+          "items": [
+            {
+              "id": 50273,
+              "name": "Engraved Gargoyle Femur",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50268,
+              "name": "Rimefang's Claw",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50259,
+              "name": "Nevermelting Ice Crystal",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 50272,
+              "name": "Frost Wyrm Ribcage",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50286,
+              "name": "Prelate's Snowshoes",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 50271,
+              "name": "Band of Stained Souls",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 50270,
+              "name": "Belt of Rotted Fingernails",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 50267,
+              "name": "Tyrannical Beheader",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50284,
+              "name": "Rusty Frozen Fingerguards",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 50283,
+              "name": "Mudslide Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 50285,
+              "name": "Icebound Bronze Cuirass",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50269,
+              "name": "Fleshwerk Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49818,
+              "name": "Painfully Sharp Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 49826,
+              "name": "Shroud of Rime",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 49816,
+              "name": "Scourgelord's Frigid Chestplate",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 49822,
+              "name": "Rimewoven Silks",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49819,
+              "name": "Skeleton Lord's Cranium",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 49820,
+              "name": "Gondria's Spectral Bracer",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 49825,
+              "name": "Palebone Robes",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 49817,
+              "name": "Shaggy Wyrmleather Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49823,
+              "name": "Cloak of the Fallen Cardinal",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 49821,
+              "name": "Protector of Frigid Souls",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 49824,
+              "name": "Horns of the Spurned Val'kyr",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 133503,
+              "name": "Protector of Frigid Souls",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 133500,
+              "name": "Painfully Sharp Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 133498,
+              "name": "Scourgelord's Frigid Chestplate",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 133502,
+              "name": "Gondria's Spectral Bracer",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 133499,
+              "name": "Shaggy Wyrmleather Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 133505,
+              "name": "Cloak of the Fallen Cardinal",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 133506,
+              "name": "Horns of the Spurned Val'kyr",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 133507,
+              "name": "Palebone Robes",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50273,
+              "name": "Engraved Gargoyle Femur",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50268,
+              "name": "Rimefang's Claw",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50259,
+              "name": "Nevermelting Ice Crystal",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 50272,
+              "name": "Frost Wyrm Ribcage",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50286,
+              "name": "Prelate's Snowshoes",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 50271,
+              "name": "Band of Stained Souls",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 50270,
+              "name": "Belt of Rotted Fingernails",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 50267,
+              "name": "Tyrannical Beheader",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 50284,
+              "name": "Rusty Frozen Fingerguards",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 50283,
+              "name": "Mudslide Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 50285,
+              "name": "Icebound Bronze Cuirass",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 50269,
+              "name": "Fleshwerk Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49818,
+              "name": "Painfully Sharp Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 49826,
+              "name": "Shroud of Rime",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 49816,
+              "name": "Scourgelord's Frigid Chestplate",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 49822,
+              "name": "Rimewoven Silks",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49819,
+              "name": "Skeleton Lord's Cranium",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 49820,
+              "name": "Gondria's Spectral Bracer",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 49825,
+              "name": "Palebone Robes",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 49817,
+              "name": "Shaggy Wyrmleather Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 49823,
+              "name": "Cloak of the Fallen Cardinal",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 49821,
+              "name": "Protector of Frigid Souls",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 49824,
+              "name": "Horns of the Spurned Val'kyr",
+              "slot": "head",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 945,
+      "name": "Seat of the Triumvirate",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 1979,
+          "name": "Zuraal the Ascended",
+          "items": [
+            {
+              "id": 151300,
+              "name": "Handwraps of the Ascended",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 151336,
+              "name": "Voidlashed Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 151315,
+              "name": "Bracers of Dark Binding",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 151320,
+              "name": "Void-Coated Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 151308,
+              "name": "Eredath Seal of Nobility",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 151329,
+              "name": "Breastplate of the Dark Touch",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 151326,
+              "name": "Waistguard of Bound Energy",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 151304,
+              "name": "Subjugator's Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 151312,
+              "name": "Ampoule of Pure Void",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 151331,
+              "name": "Pauldrons of the Broken",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 258514,
+              "name": "Umbral Spire of Zuraal",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 151315,
+              "name": "Bracers of Dark Binding",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 151326,
+              "name": "Waistguard of Bound Energy",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 151304,
+              "name": "Subjugator's Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 151331,
+              "name": "Pauldrons of the Broken",
+              "slot": "shoulder",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 1980,
+          "name": "Saprish",
+          "items": [
+            {
+              "id": 151321,
+              "name": "Darkfang Scale Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 151330,
+              "name": "Trap Jammers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 151323,
+              "name": "Pauldrons of the Void Hunter",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 151337,
+              "name": "Shadow-Weaver's Crown",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 151327,
+              "name": "Girdle of the Shadowguard",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 151303,
+              "name": "Voidbender Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 151307,
+              "name": "Void Stalker's Contract",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 151314,
+              "name": "Shifting Stalker Hide Pants",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 151318,
+              "name": "Gloves of the Dark Shroud",
+              "slot": "hands",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 1981,
+          "name": "Viceroy Nezhar",
+          "items": [
+            {
+              "id": 151316,
+              "name": "Cinch of the Umbral Lasher",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 151309,
+              "name": "Necklace of the Twisting Void",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 151332,
+              "name": "Voidclaw Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 151310,
+              "name": "Reality Breacher",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 151299,
+              "name": "Viceroy's Umbral Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 151305,
+              "name": "Entropic Wristwraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 151338,
+              "name": "Leggings of Shifting Darkness",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 151333,
+              "name": "Crown of the Dark Envoy",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 151325,
+              "name": "Void-Linked Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 151317,
+              "name": "Footpads of Seeping Dread",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 258524,
+              "name": "Grips of the Dark Viceroy",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 258523,
+              "name": "Nezhar's Netherclaw",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 151316,
+              "name": "Cinch of the Umbral Lasher",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 151299,
+              "name": "Viceroy's Umbral Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 151338,
+              "name": "Leggings of Shifting Darkness",
+              "slot": "legs",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 1982,
+          "name": "L'ura",
+          "items": [
+            {
+              "id": 151322,
+              "name": "Void-Touched Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 151340,
+              "name": "Echo of L'ura",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 151324,
+              "name": "Helm of Shadowy Descent",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 151319,
+              "name": "Twilight's Edge Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 151339,
+              "name": "Legplates of Ultimate Sacrifice",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 151328,
+              "name": "Vambraces of Lost Hope",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 151311,
+              "name": "Band of the Triumvirate",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 151302,
+              "name": "Cord of Unraveling Reality",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 151301,
+              "name": "Slippers of Growing Despair",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 151313,
+              "name": "Vest of the Void's Embrace",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 258525,
+              "name": "Scepter of the Endless Night",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 151324,
+              "name": "Helm of Shadowy Descent",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 151339,
+              "name": "Legplates of Ultimate Sacrifice",
+              "slot": "legs",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 476,
+      "name": "Skyreach",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 965,
+          "name": "Ranjit",
+          "items": [
+            {
+              "id": 109824,
+              "name": "Cord of Arcane Mystery",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109825,
+              "name": "Frost-Touched Cord",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109826,
+              "name": "Cord of Swirling Light",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109827,
+              "name": "Lightbinder Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109828,
+              "name": "Felflame Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109829,
+              "name": "Belt of Burning Focus",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109830,
+              "name": "Bloodfeather Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109831,
+              "name": "Crystalbinder Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109832,
+              "name": "Leafmender Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109833,
+              "name": "Streamslither Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109834,
+              "name": "Sharpeye Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109835,
+              "name": "Rockhide Links",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109836,
+              "name": "Lavalink Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109837,
+              "name": "Incarnadine Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 110030,
+              "name": "Chakram-Breaker Greatsword",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 109838,
+              "name": "Verdant Plate Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109839,
+              "name": "Goldsteel Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109840,
+              "name": "Gutcrusher Greatbelt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109841,
+              "name": "Rivet-Sealed Waistplate",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109842,
+              "name": "Blackwater Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109970,
+              "name": "Hood of Arcane Mystery",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109971,
+              "name": "Frost-Touched Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109843,
+              "name": "Morningscale Waistguard",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109972,
+              "name": "Hood of Swirling Light",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109973,
+              "name": "Lightbinder Cover",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109974,
+              "name": "Felflame Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109975,
+              "name": "Hood of Burning Focus",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109976,
+              "name": "Bloodfeather Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109977,
+              "name": "Crystalbinder Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109978,
+              "name": "Leafmender Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109979,
+              "name": "Blackwater Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109980,
+              "name": "Streamslither Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109981,
+              "name": "Sharpeye Gleam",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109982,
+              "name": "Rockhide Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109983,
+              "name": "Lavalink Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109984,
+              "name": "Morningscale Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109985,
+              "name": "Incarnadine Greathelm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109986,
+              "name": "Verdant Plate Crown",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109987,
+              "name": "Goldsteel Greathelm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109988,
+              "name": "Gutcrusher Coronet",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109989,
+              "name": "Rivet-Sealed Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109970,
+              "name": "Hood of Arcane Mystery",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109971,
+              "name": "Frost-Touched Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109972,
+              "name": "Hood of Swirling Light",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109973,
+              "name": "Lightbinder Cover",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109974,
+              "name": "Felflame Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109975,
+              "name": "Hood of Burning Focus",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109976,
+              "name": "Bloodfeather Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109977,
+              "name": "Crystalbinder Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109978,
+              "name": "Leafmender Hood",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109979,
+              "name": "Blackwater Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109980,
+              "name": "Streamslither Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109981,
+              "name": "Sharpeye Gleam",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109982,
+              "name": "Rockhide Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109983,
+              "name": "Lavalink Helm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109984,
+              "name": "Morningscale Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109985,
+              "name": "Incarnadine Greathelm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109986,
+              "name": "Verdant Plate Crown",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109987,
+              "name": "Goldsteel Greathelm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109988,
+              "name": "Gutcrusher Coronet",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109989,
+              "name": "Rivet-Sealed Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 109824,
+              "name": "Cord of Arcane Mystery",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109825,
+              "name": "Frost-Touched Cord",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109826,
+              "name": "Cord of Swirling Light",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109827,
+              "name": "Lightbinder Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109828,
+              "name": "Felflame Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109829,
+              "name": "Belt of Burning Focus",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109830,
+              "name": "Bloodfeather Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109831,
+              "name": "Crystalbinder Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109832,
+              "name": "Leafmender Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109842,
+              "name": "Blackwater Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109833,
+              "name": "Streamslither Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109834,
+              "name": "Sharpeye Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109835,
+              "name": "Rockhide Links",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109836,
+              "name": "Lavalink Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109843,
+              "name": "Morningscale Waistguard",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109837,
+              "name": "Incarnadine Girdle",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109838,
+              "name": "Verdant Plate Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109839,
+              "name": "Goldsteel Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109840,
+              "name": "Gutcrusher Greatbelt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 109841,
+              "name": "Rivet-Sealed Waistplate",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 110030,
+              "name": "Chakram-Breaker Greatsword",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 258046,
+              "name": "Chakram-Breaker Greatsword",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 258574,
+              "name": "Legwraps of Swirling Light",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 258575,
+              "name": "Rigid Scale Greatcloak",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 258218,
+              "name": "Skybreaker's Blade",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 966,
+          "name": "Araknath",
+          "items": [
+            {
+              "id": 109952,
+              "name": "Skulltooth Chain",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 110016,
+              "name": "Solar Containment Unit",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 109953,
+              "name": "Windseal Necklace",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109954,
+              "name": "Magister's Chain",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109955,
+              "name": "Demonbinder Cabochon",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109956,
+              "name": "Necklace of Endless Shadow",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109957,
+              "name": "Alc's Pendant of Fiery Dreams",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109958,
+              "name": "Healing Leaf Necklace",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109959,
+              "name": "Chain of Soothing Light",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109960,
+              "name": "Wavesurge Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109961,
+              "name": "Pendant of Purifying Mists",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109962,
+              "name": "Bloodmist Pendant",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109963,
+              "name": "Goreclasp Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109964,
+              "name": "Necklace of Furious Zeal",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109965,
+              "name": "Fistbreak Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109966,
+              "name": "Reinforced Bloodsteel Gorget",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109967,
+              "name": "Necklace of Holy Deflection",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 110031,
+              "name": "Spire of the Furious Construct",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 109968,
+              "name": "Flesh Beetle Brooch",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109969,
+              "name": "Choker of Weeping Viscera",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109784,
+              "name": "Sandals of Arcane Mystery",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109785,
+              "name": "Frost-Touched Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109786,
+              "name": "Sandals of Swirling Light",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109787,
+              "name": "Boots of Burning Focus",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109788,
+              "name": "Bloodfeather Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109789,
+              "name": "Crystalbinder Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109790,
+              "name": "Streamslither Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109791,
+              "name": "Sharpeye Greaves",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109792,
+              "name": "Rockhide Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109793,
+              "name": "Incarnadine Greaves",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109794,
+              "name": "Verdant Plate Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109795,
+              "name": "Goldsteel Sabatons",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109796,
+              "name": "Lightbinder Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109797,
+              "name": "Felflame Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109798,
+              "name": "Leafmender Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109799,
+              "name": "Blackwater Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109800,
+              "name": "Lavalink Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109801,
+              "name": "Morningscale Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109802,
+              "name": "Gutcrusher Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109803,
+              "name": "Rivet-Sealed Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109950,
+              "name": "Stormshot Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109951,
+              "name": "Fireblade Collar",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 110031,
+              "name": "Spire of the Furious Construct",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 110016,
+              "name": "Solar Containment Unit",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 112234,
+              "name": "Gutpunch Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 112235,
+              "name": "Necklace of a Thousand Threads",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 112236,
+              "name": "Edgebreaker Pendant",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 112237,
+              "name": "Choker of Evanescing Entrails",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109950,
+              "name": "Stormshot Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109951,
+              "name": "Fireblade Collar",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109952,
+              "name": "Skulltooth Chain",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109953,
+              "name": "Windseal Necklace",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109954,
+              "name": "Magister's Chain",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109955,
+              "name": "Demonbinder Cabochon",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109956,
+              "name": "Necklace of Endless Shadow",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109957,
+              "name": "Alc's Pendant of Fiery Dreams",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109958,
+              "name": "Healing Leaf Necklace",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109959,
+              "name": "Chain of Soothing Light",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109960,
+              "name": "Wavesurge Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109961,
+              "name": "Pendant of Purifying Mists",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109962,
+              "name": "Bloodmist Pendant",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109963,
+              "name": "Goreclasp Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109964,
+              "name": "Necklace of Furious Zeal",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109968,
+              "name": "Flesh Beetle Brooch",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109965,
+              "name": "Fistbreak Choker",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109966,
+              "name": "Reinforced Bloodsteel Gorget",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109967,
+              "name": "Necklace of Holy Deflection",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109969,
+              "name": "Choker of Weeping Viscera",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 109784,
+              "name": "Sandals of Arcane Mystery",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109785,
+              "name": "Frost-Touched Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109786,
+              "name": "Sandals of Swirling Light",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109796,
+              "name": "Lightbinder Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109797,
+              "name": "Felflame Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109787,
+              "name": "Boots of Burning Focus",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109788,
+              "name": "Bloodfeather Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109789,
+              "name": "Crystalbinder Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109798,
+              "name": "Leafmender Sandals",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109799,
+              "name": "Blackwater Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109790,
+              "name": "Streamslither Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109791,
+              "name": "Sharpeye Greaves",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109792,
+              "name": "Rockhide Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109800,
+              "name": "Lavalink Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109801,
+              "name": "Morningscale Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109793,
+              "name": "Incarnadine Greaves",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109794,
+              "name": "Verdant Plate Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109795,
+              "name": "Goldsteel Sabatons",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109802,
+              "name": "Gutcrusher Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 109803,
+              "name": "Rivet-Sealed Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 258047,
+              "name": "Spire of the Furious Construct",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 252418,
+              "name": "Solar Core Igniter",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 258576,
+              "name": "Sharpeye Chestguard",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 258577,
+              "name": "Boots of Burning Focus",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 258578,
+              "name": "Lightbinder Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 258579,
+              "name": "Gutcrusher Greathelm",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 258436,
+              "name": "Edge of the Burning Sun",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 967,
+          "name": "Rukhran",
+          "items": [
+            {
+              "id": 110032,
+              "name": "Beakbreaker Scimitar",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 109844,
+              "name": "Gloves of Arcane Mystery",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109845,
+              "name": "Frost-Touched Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109846,
+              "name": "Gloves of Swirling Light",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109847,
+              "name": "Lightbinder Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109848,
+              "name": "Gauntlets of Burning Focus",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109849,
+              "name": "Bloodfeather Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109850,
+              "name": "Crystalbinder Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109851,
+              "name": "Leafmender Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109852,
+              "name": "Streamslither Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109853,
+              "name": "Sharpeye Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109854,
+              "name": "Rockhide Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109855,
+              "name": "Lavalink Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109856,
+              "name": "Incarnadine Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109857,
+              "name": "Verdant Plate Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109858,
+              "name": "Goldsteel Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109859,
+              "name": "Gutcrusher Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109860,
+              "name": "Rivet-Sealed Crushers",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109861,
+              "name": "Felflame Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109862,
+              "name": "Blackwater Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109863,
+              "name": "Morningscale Gauntlet",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109864,
+              "name": "Bracers of Arcane Mystery",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109865,
+              "name": "Frost-Touched Wristwraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109866,
+              "name": "Bracers of Swirling Light",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109867,
+              "name": "Lightbinder Wristwraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109868,
+              "name": "Bracers of Burning Focus",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109869,
+              "name": "Bloodfeather Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109870,
+              "name": "Crystalbinder Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109871,
+              "name": "Leafmender Wraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109872,
+              "name": "Streamslither Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109873,
+              "name": "Sharpeye Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109874,
+              "name": "Rockhide Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109875,
+              "name": "Lavalink Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109876,
+              "name": "Incarnadine Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109877,
+              "name": "Verdant Plate Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 110006,
+              "name": "Rukhran's Quill",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 109878,
+              "name": "Goldsteel Bindings",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109879,
+              "name": "Gutcrusher Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109880,
+              "name": "Rivet-Sealed Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109881,
+              "name": "Felflame Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109882,
+              "name": "Blackwater Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109883,
+              "name": "Morningscale Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109852,
+              "name": "Streamslither Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109853,
+              "name": "Sharpeye Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109854,
+              "name": "Rockhide Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109855,
+              "name": "Lavalink Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109863,
+              "name": "Morningscale Gauntlet",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109856,
+              "name": "Incarnadine Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109857,
+              "name": "Verdant Plate Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109858,
+              "name": "Goldsteel Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109859,
+              "name": "Gutcrusher Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109860,
+              "name": "Rivet-Sealed Crushers",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109864,
+              "name": "Bracers of Arcane Mystery",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109865,
+              "name": "Frost-Touched Wristwraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109866,
+              "name": "Bracers of Swirling Light",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109867,
+              "name": "Lightbinder Wristwraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109881,
+              "name": "Felflame Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109868,
+              "name": "Bracers of Burning Focus",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109869,
+              "name": "Bloodfeather Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109870,
+              "name": "Crystalbinder Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109871,
+              "name": "Leafmender Wraps",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109882,
+              "name": "Blackwater Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109872,
+              "name": "Streamslither Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109873,
+              "name": "Sharpeye Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109874,
+              "name": "Rockhide Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109875,
+              "name": "Lavalink Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109883,
+              "name": "Morningscale Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109876,
+              "name": "Incarnadine Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109877,
+              "name": "Verdant Plate Wristguards",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109878,
+              "name": "Goldsteel Bindings",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109879,
+              "name": "Gutcrusher Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 109880,
+              "name": "Rivet-Sealed Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 258048,
+              "name": "Beakbreaker Scimitar",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 252411,
+              "name": "Radiant Sunstone",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 258580,
+              "name": "Bracers of Blazing Light",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 258581,
+              "name": "Bloodfeather Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 258582,
+              "name": "Rigid Scale Boots",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 258583,
+              "name": "Incarnadine Gauntlets",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 258438,
+              "name": "Blazing Sunclaws",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 258472,
+              "name": "Rukhran's Solar Reliquary",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 110032,
+              "name": "Beakbreaker Scimitar",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 110006,
+              "name": "Rukhran's Quill",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 109844,
+              "name": "Gloves of Arcane Mystery",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109845,
+              "name": "Frost-Touched Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109846,
+              "name": "Gloves of Swirling Light",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109847,
+              "name": "Lightbinder Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109861,
+              "name": "Felflame Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109848,
+              "name": "Gauntlets of Burning Focus",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109849,
+              "name": "Bloodfeather Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109850,
+              "name": "Crystalbinder Gloves",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109851,
+              "name": "Leafmender Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 109862,
+              "name": "Blackwater Grips",
+              "slot": "hands",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 968,
+          "name": "High Sage Viryx",
+          "items": [
+            {
+              "id": 110011,
+              "name": "Fires of the Sun",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 109759,
+              "name": "Ro-Ger's Brown Diamond Seal",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109760,
+              "name": "Ced's Chiming Circle",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109761,
+              "name": "Bloodthorn Band",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109762,
+              "name": "Signet of Radiant Leaves",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109763,
+              "name": "Diamondglow Circle",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109764,
+              "name": "Mark of Ice",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109765,
+              "name": "Golem's Gleaming Eye",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109766,
+              "name": "Darkflame Loop",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109767,
+              "name": "Ring of Purified Light",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109768,
+              "name": "Band of Growing Leaves",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109769,
+              "name": "Slicebinder Loop",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109770,
+              "name": "Signet of Crashing Waves",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109771,
+              "name": "Bloodied Ring of Mytosis",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109772,
+              "name": "Knucklebone of Lo'Dronar",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109773,
+              "name": "Band of Iron Scale",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109774,
+              "name": "Ring of Ripped Flesh",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109775,
+              "name": "Bladebinder Ring",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109776,
+              "name": "Seal of Resilient Fortitude",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109777,
+              "name": "Unsullied Signet",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 110033,
+              "name": "Arcanic of the High Sage",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 109778,
+              "name": "Signet of the Glorious Protector",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 110034,
+              "name": "Viryx's Indomitable Bulwark",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 109779,
+              "name": "Ancient Draenic Loop",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109780,
+              "name": "Signet of Shifting Magics",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109781,
+              "name": "Seal of Vindication",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109782,
+              "name": "Disease-Binder Seal",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109783,
+              "name": "Band of the Stalwart Stanchion",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109930,
+              "name": "Mantle of Arcane Mystery",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109931,
+              "name": "Frost-Touched Shoulderpads",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109804,
+              "name": "Trousers of Arcane Mystery",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109932,
+              "name": "Mantle of Swirling Light",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109805,
+              "name": "Frost-Touched Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109933,
+              "name": "Lightbinder Shoulderpads",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109806,
+              "name": "Leggings of Swirling Light",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109934,
+              "name": "Spaulders of Burning Focus",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109807,
+              "name": "Lightbinder Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109935,
+              "name": "Bloodfeather Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109808,
+              "name": "Felflame Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109936,
+              "name": "Crystalbinder Shoulderpads",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109809,
+              "name": "Legguards of Burning Focus",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109937,
+              "name": "Leafmender Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109810,
+              "name": "Bloodfeather Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109938,
+              "name": "Blackwater Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109811,
+              "name": "Crystalbinder Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109939,
+              "name": "Streamslither Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109812,
+              "name": "Leafmender Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109940,
+              "name": "Sharpeye Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109813,
+              "name": "Streamslither Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109941,
+              "name": "Rockhide Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109814,
+              "name": "Sharpeye Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109942,
+              "name": "Lavalink Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109815,
+              "name": "Rockhide Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109943,
+              "name": "Incarnadine Shoulderguard",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109816,
+              "name": "Lavalink Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109944,
+              "name": "Verdant Plate Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109817,
+              "name": "Morningscale Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109945,
+              "name": "Goldsteel Shouldercaps",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109818,
+              "name": "Incarnadine Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109946,
+              "name": "Gutcrusher Shoulderplates",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109819,
+              "name": "Verdant Plate Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109947,
+              "name": "Rivet-Sealed Shoulderplates",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109948,
+              "name": "Felflame Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109820,
+              "name": "Goldsteel Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109949,
+              "name": "Morningscale Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109821,
+              "name": "Gutcrusher Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109822,
+              "name": "Rivet-Sealed Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109823,
+              "name": "Blackwater Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 110011,
+              "name": "Fires of the Sun",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 110033,
+              "name": "Arcanic of the High Sage",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 110034,
+              "name": "Viryx's Indomitable Bulwark",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 109930,
+              "name": "Mantle of Arcane Mystery",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109931,
+              "name": "Frost-Touched Shoulderpads",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109932,
+              "name": "Mantle of Swirling Light",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109933,
+              "name": "Lightbinder Shoulderpads",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109948,
+              "name": "Felflame Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109934,
+              "name": "Spaulders of Burning Focus",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109935,
+              "name": "Bloodfeather Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109936,
+              "name": "Crystalbinder Shoulderpads",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109937,
+              "name": "Leafmender Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109938,
+              "name": "Blackwater Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109939,
+              "name": "Streamslither Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109940,
+              "name": "Sharpeye Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109941,
+              "name": "Rockhide Shoulderguards",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109942,
+              "name": "Lavalink Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109949,
+              "name": "Morningscale Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109943,
+              "name": "Incarnadine Shoulderguard",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109944,
+              "name": "Verdant Plate Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109945,
+              "name": "Goldsteel Shouldercaps",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109946,
+              "name": "Gutcrusher Shoulderplates",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 109947,
+              "name": "Rivet-Sealed Shoulderplates",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 112238,
+              "name": "Toothbreaker Ring",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 112239,
+              "name": "Seal of Resounding Stalwarts",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 112240,
+              "name": "Iron Wolf Signet",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 112241,
+              "name": "Signet of the Meditative Mind",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 112242,
+              "name": "Band of Bubbly Brews",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109759,
+              "name": "Ro-Ger's Brown Diamond Seal",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109760,
+              "name": "Ced's Chiming Circle",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109761,
+              "name": "Bloodthorn Band",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109762,
+              "name": "Signet of Radiant Leaves",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109779,
+              "name": "Ancient Draenic Loop",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109763,
+              "name": "Diamondglow Circle",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109764,
+              "name": "Mark of Ice",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109765,
+              "name": "Golem's Gleaming Eye",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109766,
+              "name": "Darkflame Loop",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109780,
+              "name": "Signet of Shifting Magics",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109767,
+              "name": "Ring of Purified Light",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109768,
+              "name": "Band of Growing Leaves",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109769,
+              "name": "Slicebinder Loop",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109770,
+              "name": "Signet of Crashing Waves",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109781,
+              "name": "Seal of Vindication",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109771,
+              "name": "Bloodied Ring of Mytosis",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109772,
+              "name": "Knucklebone of Lo'Dronar",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109773,
+              "name": "Band of Iron Scale",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109774,
+              "name": "Ring of Ripped Flesh",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109782,
+              "name": "Disease-Binder Seal",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109775,
+              "name": "Bladebinder Ring",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109776,
+              "name": "Seal of Resilient Fortitude",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109777,
+              "name": "Unsullied Signet",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109778,
+              "name": "Signet of the Glorious Protector",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109783,
+              "name": "Band of the Stalwart Stanchion",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 109804,
+              "name": "Trousers of Arcane Mystery",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109805,
+              "name": "Frost-Touched Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109806,
+              "name": "Leggings of Swirling Light",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109807,
+              "name": "Lightbinder Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109808,
+              "name": "Felflame Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109809,
+              "name": "Legguards of Burning Focus",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109810,
+              "name": "Bloodfeather Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109811,
+              "name": "Crystalbinder Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109812,
+              "name": "Leafmender Legwraps",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109823,
+              "name": "Blackwater Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109813,
+              "name": "Streamslither Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109814,
+              "name": "Sharpeye Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109815,
+              "name": "Rockhide Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109816,
+              "name": "Lavalink Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109817,
+              "name": "Morningscale Leggings",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109818,
+              "name": "Incarnadine Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109819,
+              "name": "Verdant Plate Legguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109820,
+              "name": "Goldsteel Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109821,
+              "name": "Gutcrusher Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 109822,
+              "name": "Rivet-Sealed Legplates",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 258049,
+              "name": "Viryx's Indomitable Bulwark",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 258050,
+              "name": "Arcanic of the High Sage",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 252420,
+              "name": "Solarflare Prism",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 258584,
+              "name": "Lightbinder Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 258585,
+              "name": "Sharpeye Gleam",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 258586,
+              "name": "Bloodfeather Chestguard",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 258587,
+              "name": "Spaulders of Scorching Ray",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 258484,
+              "name": "Sunlance of Viryx",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1299,
+      "name": "Windrunner Spire",
+      "type": "dungeon",
+      "encounters": [
+        {
+          "id": 2655,
+          "name": "Emberdawn",
+          "items": [
+            {
+              "id": 251077,
+              "name": "Roostwarden's Bough",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251078,
+              "name": "Emberdawn Defender",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251079,
+              "name": "Amberfrond Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 251080,
+              "name": "Brambledawn Halo",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 251081,
+              "name": "Embergrove Grasps",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 251082,
+              "name": "Snapvine Cinch",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 250144,
+              "name": "Emberwing Feather",
+              "slot": "trinket1",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2656,
+          "name": "Derelict Duo",
+          "items": [
+            {
+              "id": 250226,
+              "name": "Latch's Crooked Hook",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251085,
+              "name": "Mantle of Dark Devotion",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251087,
+              "name": "Legwraps of Lingering Legacies",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251084,
+              "name": "Whipcoil Sabatons",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251086,
+              "name": "Riphook Defender",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 251083,
+              "name": "Excavating Cudgel",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2657,
+          "name": "Commander Kroluk",
+          "items": [
+            {
+              "id": 250227,
+              "name": "Kroluk's Warbanner",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251090,
+              "name": "Commander's Faded Breeches",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 251092,
+              "name": "Fallen Grunt's Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251089,
+              "name": "Grips of Forgotten Honor",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 251091,
+              "name": "Sabatons of Furious Revenge",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 251088,
+              "name": "Warworn Cleaver",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2658,
+          "name": "The Restless Heart",
+          "items": [
+            {
+              "id": 250256,
+              "name": "Heart of Wind",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 251096,
+              "name": "Pendant of Aching Grief",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 251099,
+              "name": "Vest of the Howling Gale",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 251097,
+              "name": "Spaulders of Arrow's Flight",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 251094,
+              "name": "Sigil of the Restless Heart",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 251098,
+              "name": "Fletcher's Faded Faceplate",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 251095,
+              "name": "Hurricane's Heart",
+              "slot": "ranged",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1308,
+      "name": "March on Quel'Danas",
+      "type": "raid",
+      "encounters": [
+        {
+          "id": 2739,
+          "name": "Belo'ren, Child of Al'ar",
+          "items": [
+            {
+              "id": 249919,
+              "name": "Sin'dorei Band of Hope",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 249806,
+              "name": "Radiant Plume",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249807,
+              "name": "The Eternal Egg",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249284,
+              "name": "Belo'ren's Swift Talon",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249283,
+              "name": "Belo'melorn, the Shattered Talon",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249921,
+              "name": "Thalassian Dawnguard",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249376,
+              "name": "Whisper-Inscribed Sash",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249328,
+              "name": "Echoing Void Mantle",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 249322,
+              "name": "Radiant Clutchtender's Jerkin",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 249377,
+              "name": "Darkstrider Treads",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249324,
+              "name": "Eternal Flame Scaleguards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 249307,
+              "name": "Emberborn Grasps",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 260235,
+              "name": "Umbral Plume",
+              "slot": "trinket1",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2740,
+          "name": "Midnight Falls",
+          "items": [
+            {
+              "id": 250247,
+              "name": "Amulet of the Abyssal Hymn",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 249811,
+              "name": "Light of the Cosmic Crescendo",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249810,
+              "name": "Shadow of the Empyrean Requiem",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249296,
+              "name": "Alah'endal, the Dawnsong",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249286,
+              "name": "Brazier of the Dissonant Dirge",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249912,
+              "name": "Robes of Endless Oblivion",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 249913,
+              "name": "Mask of Darkest Intent",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 249914,
+              "name": "Oblivion Guise",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 249915,
+              "name": "Extinction Guards",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 249920,
+              "name": "Eye of Midnight",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 260408,
+              "name": "Lightless Lament",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1312,
+      "name": "Midnight",
+      "type": "raid",
+      "encounters": [
+        {
+          "id": 2827,
+          "name": "Lu'ashal",
+          "items": [
+            {
+              "id": 250462,
+              "name": "Forgotten Farstrider's Insignia",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 250456,
+              "name": "Wretched Scholar's Gilded Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 250457,
+              "name": "Devouring Outrider's Chausses",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 250459,
+              "name": "Bramblestalker's Feathered Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250458,
+              "name": "Host Commander's Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250451,
+              "name": "Dawncrazed Beast Cleaver",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 250453,
+              "name": "Scepter of the Unbound Light",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 250447,
+              "name": "Radiant Eversong Scepter",
+              "slot": "off_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2829,
+          "name": "Thorm'belan",
+          "items": [
+            {
+              "id": 250449,
+              "name": "Skulking Nettledirk",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 250452,
+              "name": "Blooming Thornblade",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 250455,
+              "name": "Beastly Blossombarb",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 250462,
+              "name": "Forgotten Farstrider's Insignia",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 250456,
+              "name": "Wretched Scholar's Gilded Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 250457,
+              "name": "Devouring Outrider's Chausses",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 250459,
+              "name": "Bramblestalker's Feathered Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250458,
+              "name": "Host Commander's Casque",
+              "slot": "head",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2828,
+          "name": "Predaxas",
+          "items": [
+            {
+              "id": 250462,
+              "name": "Forgotten Farstrider's Insignia",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 250456,
+              "name": "Wretched Scholar's Gilded Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 250457,
+              "name": "Devouring Outrider's Chausses",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 250459,
+              "name": "Bramblestalker's Feathered Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250458,
+              "name": "Host Commander's Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250460,
+              "name": "Encroaching Shadow Signet",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 250454,
+              "name": "Devouring Vanguard's Soulcleaver",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 250448,
+              "name": "Voidbender's Spire",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2782,
+          "name": "Cragpine",
+          "items": [
+            {
+              "id": 250462,
+              "name": "Forgotten Farstrider's Insignia",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 250456,
+              "name": "Wretched Scholar's Gilded Robe",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 250457,
+              "name": "Devouring Outrider's Chausses",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 250459,
+              "name": "Bramblestalker's Feathered Cowl",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250458,
+              "name": "Host Commander's Casque",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 250461,
+              "name": "Chain of the Ancient Watcher",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 250450,
+              "name": "Forest Sentinel's Savage Longbow",
+              "slot": "ranged",
+              "class_mask": -1
+            },
+            {
+              "id": 250446,
+              "name": "Cragtender Bulwark",
+              "slot": "off_hand",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1314,
+      "name": "The Dreamrift",
+      "type": "raid",
+      "encounters": [
+        {
+          "id": 2795,
+          "name": "Chimaerus the Undreamt God",
+          "items": [
+            {
+              "id": 249343,
+              "name": "Gaze of the Alnseer",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249805,
+              "name": "Undreamt God's Oozing Vestige",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249278,
+              "name": "Alnscorned Spire",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249922,
+              "name": "Tome of Alnscorned Regret",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249373,
+              "name": "Dream-Scorched Striders",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249374,
+              "name": "Scorn-Scarred Shul'ka's Belt",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249371,
+              "name": "Scornbane Waistguard",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249381,
+              "name": "Greaves of the Unformed",
+              "slot": "feet",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 1307,
+      "name": "The Voidspire",
+      "type": "raid",
+      "encounters": [
+        {
+          "id": 2733,
+          "name": "Imperator Averzian",
+          "items": [
+            {
+              "id": 249293,
+              "name": "Weight of Command",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249344,
+              "name": "Light Company Guidon",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249313,
+              "name": "Light-Judged Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 249310,
+              "name": "Robes of the Voidbound",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 249306,
+              "name": "Devouring Night's Visage",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 249275,
+              "name": "Bulwark of Noble Resolve",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249326,
+              "name": "Light's March Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 249320,
+              "name": "Sabatons of Obscurement",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249334,
+              "name": "Void-Claimed Shinkickers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249323,
+              "name": "Leggings of the Devouring Advance",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 249335,
+              "name": "Imperator's Banner",
+              "slot": "back",
+              "class_mask": -1
+            },
+            {
+              "id": 249319,
+              "name": "Endless March Waistwrap",
+              "slot": "waist",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2734,
+          "name": "Vorasius",
+          "items": [
+            {
+              "id": 249302,
+              "name": "Inescapable Reach",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249925,
+              "name": "Hungering Victory",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249342,
+              "name": "Heart of Ancient Hunger",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249336,
+              "name": "Signet of the Starved Beast",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 249276,
+              "name": "Grimoire of the Eternal Light",
+              "slot": "off_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249332,
+              "name": "Parasite Stompers",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249317,
+              "name": "Frenzy's Rebuke",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 249327,
+              "name": "Void-Skinned Bracers",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 249315,
+              "name": "Voracious Wristwraps",
+              "slot": "wrist",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2736,
+          "name": "Fallen-King Salhadaar",
+          "items": [
+            {
+              "id": 249281,
+              "name": "Blade of the Final Twilight",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249298,
+              "name": "Tormentor's Bladed Fists",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249340,
+              "name": "Wraps of Cosmic Madness",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249341,
+              "name": "Volatile Void Suffuser",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249337,
+              "name": "Ribbon of Coiled Malice",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 249316,
+              "name": "Crown of the Fractured Tyrant",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 249304,
+              "name": "Fallen King's Cuffs",
+              "slot": "wrist",
+              "class_mask": -1
+            },
+            {
+              "id": 249314,
+              "name": "Twisted Twilight Sash",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249308,
+              "name": "Despotic Raiment",
+              "slot": "chest",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2735,
+          "name": "Vaelgor & Ezzorak",
+          "items": [
+            {
+              "id": 249280,
+              "name": "Emblazoned Sunglaive",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249287,
+              "name": "Clutchmates' Caress",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249339,
+              "name": "Gloom-Spattered Dreadscale",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249346,
+              "name": "Vaelgor's Final Stare",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249331,
+              "name": "Ezzorak's Gloombind",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249318,
+              "name": "Nullwalker's Dread Epaulettes",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 249321,
+              "name": "Vaelgor's Fearsome Grasp",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 249305,
+              "name": "Slippers of the Midnight Flame",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249370,
+              "name": "Draconic Nullcape",
+              "slot": "back",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2737,
+          "name": "Lightblinded Vanguard",
+          "items": [
+            {
+              "id": 249277,
+              "name": "Bellamy's Final Judgement",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249294,
+              "name": "Blade of the Blind Verdict",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249808,
+              "name": "Litany of Lightblind Wrath",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249369,
+              "name": "Bond of Light",
+              "slot": "finger1",
+              "class_mask": -1
+            },
+            {
+              "id": 249311,
+              "name": "Lightblood Greaves",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 249303,
+              "name": "Waistcord of the Judged",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249333,
+              "name": "Blooming Barklight Spaulders",
+              "slot": "shoulder",
+              "class_mask": -1
+            },
+            {
+              "id": 249330,
+              "name": "War Chaplain's Grips",
+              "slot": "hands",
+              "class_mask": -1
+            }
+          ]
+        },
+        {
+          "id": 2738,
+          "name": "Crown of the Cosmos",
+          "items": [
+            {
+              "id": 249288,
+              "name": "Ranger-Captain's Lethal Recurve",
+              "slot": "ranged",
+              "class_mask": -1
+            },
+            {
+              "id": 249295,
+              "name": "Turalyon's False Echo",
+              "slot": "main_hand",
+              "class_mask": -1
+            },
+            {
+              "id": 249809,
+              "name": "Locus-Walker's Ribbon",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249345,
+              "name": "Ranger-Captain's Iridescent Insignia",
+              "slot": "trinket1",
+              "class_mask": -1
+            },
+            {
+              "id": 249368,
+              "name": "Eternal Voidsong Chain",
+              "slot": "neck",
+              "class_mask": -1
+            },
+            {
+              "id": 249380,
+              "name": "Hate-Tied Waistchain",
+              "slot": "waist",
+              "class_mask": -1
+            },
+            {
+              "id": 249309,
+              "name": "Sunbound Breastplate",
+              "slot": "chest",
+              "class_mask": -1
+            },
+            {
+              "id": 249325,
+              "name": "Untethered Berserker's Grips",
+              "slot": "hands",
+              "class_mask": -1
+            },
+            {
+              "id": 249312,
+              "name": "Nightblade's Pantaloons",
+              "slot": "legs",
+              "class_mask": -1
+            },
+            {
+              "id": 249382,
+              "name": "Canopy Walker's Footwraps",
+              "slot": "feet",
+              "class_mask": -1
+            },
+            {
+              "id": 249329,
+              "name": "Gaze of the Unrestrained",
+              "slot": "head",
+              "class_mask": -1
+            },
+            {
+              "id": 260423,
+              "name": "Arator's Swift Remembrance",
+              "slot": "main_hand",
+              "class_mask": -1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "ilvl_tracks": {
+    "dungeon": [
+      {
+        "key": "champion",
+        "label": "Champion (low keys)",
+        "ilvl": 250
+      },
+      {
+        "key": "hero",
+        "label": "Hero (mid keys)",
+        "ilvl": 263
+      },
+      {
+        "key": "myth",
+        "label": "Myth (high keys)",
+        "ilvl": 276
+      }
+    ],
+    "raid": [
+      {
+        "key": "lfr",
+        "label": "LFR",
+        "ilvl": 246
+      },
+      {
+        "key": "normal",
+        "label": "Normal",
+        "ilvl": 259
+      },
+      {
+        "key": "heroic",
+        "label": "Heroic",
+        "ilvl": 272
+      },
+      {
+        "key": "mythic",
+        "label": "Mythic",
+        "ilvl": 289
+      }
+    ]
+  }
+}
