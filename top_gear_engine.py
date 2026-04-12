@@ -11,7 +11,9 @@ This is dramatically faster than the original approach of spawning one simc
 process per item: all alternatives are evaluated in a single simc run.
 """
 import json
+import os
 import subprocess
+import tempfile
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -103,27 +105,41 @@ def run_simc_with_input(
     Raises:
         RuntimeError: on timeout, missing binary, empty output, or bad JSON.
     """
+    tmp_fd, tmp_path = tempfile.mkstemp(suffix=".json")
+    os.close(tmp_fd)
     try:
-        proc = subprocess.run(
-            [simc_executable, "json2=stdout", "-"],
-            input=simc_input,
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-        )
-    except subprocess.TimeoutExpired:
-        raise RuntimeError(f"simc timed out after {timeout}s")
-    except FileNotFoundError:
-        raise RuntimeError(f"simc executable not found: {simc_executable}")
+        try:
+            proc = subprocess.run(
+                [simc_executable, f"json2={tmp_path}", "-"],
+                input=simc_input,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
+        except subprocess.TimeoutExpired:
+            raise RuntimeError(f"simc timed out after {timeout}s")
+        except FileNotFoundError:
+            raise RuntimeError(f"simc executable not found: {simc_executable}")
 
-    if not proc.stdout.strip():
-        snippet = proc.stderr[-2000:] if proc.stderr else "(no stderr)"
-        raise RuntimeError(f"simc produced no JSON output. stderr: {snippet}")
+        try:
+            with open(tmp_path, encoding="utf-8") as f:
+                raw = f.read()
+        except OSError:
+            raw = ""
 
-    try:
-        return json.loads(proc.stdout)
-    except json.JSONDecodeError as exc:
-        raise RuntimeError(f"Failed to parse simc JSON output: {exc}") from exc
+        if not raw.strip():
+            snippet = proc.stderr[-2000:] if proc.stderr else "(no stderr)"
+            raise RuntimeError(f"simc produced no JSON output. stderr: {snippet}")
+
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError(f"Failed to parse simc JSON output: {exc}") from exc
+    finally:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
 
 
 def combo_count(result: ParseResult, selected_bag_items: Optional[list] = None) -> int:

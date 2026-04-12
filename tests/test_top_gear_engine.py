@@ -64,37 +64,41 @@ def base_config():
 # run_simc_with_input
 # ---------------------------------------------------------------------------
 
+def _make_simc_run(content: str):
+    """Return a subprocess.run side_effect that writes *content* to the temp file."""
+    def _run(cmd, **kwargs):
+        json2_arg = next((a for a in cmd if a.startswith("json2=")), None)
+        if json2_arg:
+            tmp_path = json2_arg[len("json2="):]
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                f.write(content)
+        mock_proc = MagicMock()
+        mock_proc.stderr = ""
+        return mock_proc
+    return _run
+
+
 class TestRunSimcWithInput:
     def test_success_returns_dict(self):
-        mock_proc = MagicMock()
-        mock_proc.stdout = json.dumps(MOCK_SIMC_JSON)
-        mock_proc.stderr = ""
-        with patch("subprocess.run", return_value=mock_proc):
+        with patch("subprocess.run", side_effect=_make_simc_run(json.dumps(MOCK_SIMC_JSON))):
             result = run_simc_with_input("some input", "/fake/simc")
         assert isinstance(result, dict)
         assert result["sim"]["players"][0]["collected_data"]["dps"]["mean"] == BASELINE_DPS
 
     def test_empty_stdout_raises(self):
         mock_proc = MagicMock()
-        mock_proc.stdout = ""
         mock_proc.stderr = "something went wrong"
         with patch("subprocess.run", return_value=mock_proc):
             with pytest.raises(RuntimeError, match="no JSON output"):
                 run_simc_with_input("some input", "/fake/simc")
 
     def test_whitespace_only_stdout_raises(self):
-        mock_proc = MagicMock()
-        mock_proc.stdout = "   \n\t  "
-        mock_proc.stderr = ""
-        with patch("subprocess.run", return_value=mock_proc):
+        with patch("subprocess.run", side_effect=_make_simc_run("   \n\t  ")):
             with pytest.raises(RuntimeError, match="no JSON output"):
                 run_simc_with_input("some input", "/fake/simc")
 
     def test_invalid_json_raises(self):
-        mock_proc = MagicMock()
-        mock_proc.stdout = "not { json"
-        mock_proc.stderr = ""
-        with patch("subprocess.run", return_value=mock_proc):
+        with patch("subprocess.run", side_effect=_make_simc_run("not { json")):
             with pytest.raises(RuntimeError, match="Failed to parse"):
                 run_simc_with_input("some input", "/fake/simc")
 
@@ -109,20 +113,14 @@ class TestRunSimcWithInput:
                 run_simc_with_input("some input", "/fake/simc")
 
     def test_simc_called_with_json2_stdout(self):
-        mock_proc = MagicMock()
-        mock_proc.stdout = json.dumps(MOCK_SIMC_JSON)
-        mock_proc.stderr = ""
-        with patch("subprocess.run", return_value=mock_proc) as mock_run:
+        with patch("subprocess.run", side_effect=_make_simc_run(json.dumps(MOCK_SIMC_JSON))) as mock_run:
             run_simc_with_input("input", "/fake/simc")
         args = mock_run.call_args[0][0]
-        assert "json2=stdout" in args
+        assert any(a.startswith("json2=") for a in args)
         assert "-" in args
 
     def test_input_piped_via_stdin(self):
-        mock_proc = MagicMock()
-        mock_proc.stdout = json.dumps(MOCK_SIMC_JSON)
-        mock_proc.stderr = ""
-        with patch("subprocess.run", return_value=mock_proc) as mock_run:
+        with patch("subprocess.run", side_effect=_make_simc_run(json.dumps(MOCK_SIMC_JSON))) as mock_run:
             run_simc_with_input("my profile", "/fake/simc")
         kwargs = mock_run.call_args[1]
         assert kwargs.get("input") == "my profile"
