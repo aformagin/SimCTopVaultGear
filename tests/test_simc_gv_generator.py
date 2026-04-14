@@ -13,6 +13,11 @@ from simc_gv_generator import (
     parse_weekly_rewards,
     define_start_end_bags,
     define_start_end_wr,
+    _build_variant_specs,
+    _clean_variant_filename,
+    _get_equipped_items_from_import,
+    generated_variant_labels,
+    get_generated_variant_label,
     GEAR_SLOTS,
     ParsedItem,
     TalentLoadout,
@@ -264,3 +269,136 @@ class TestLegacyHelpers:
         for name, gear_line in items:
             assert name
             assert "id=" in gear_line
+
+    def test_build_variant_specs_adds_slot_labels_for_ring_items(self):
+        simc_import = [
+            'druid="Tester"\n',
+            "spec=balance\n",
+            "talents=CYGAAAAAAAAAAAAAAAAAAAAA\n",
+            "finger1=,id=111111\n",
+            "finger2=,id=222222\n",
+            "trinket1=,id=333333\n",
+            "trinket2=,id=444444\n",
+            "### Weekly Reward Choices\n",
+            "# Bifurcation Band (678)\n",
+            "# finger=,id=555555\n",
+            "# Signet of Momentum (678)\n",
+            "# finger=,id=666666\n",
+            "### End of Weekly Reward Choices\n",
+        ]
+        reward_items = [
+            ("Bifurcation Band", "finger=,id=555555", 7, 12),
+            ("Signet of Momentum", "finger=,id=666666", 7, 12),
+        ]
+
+        variants = _build_variant_specs(
+            reward_items,
+            _get_equipped_items_from_import(simc_import),
+        )
+        labels = {label for label, *_ in variants}
+
+        assert "Bifurcation Band (Finger 1)" in labels
+        assert "Bifurcation Band (Finger 2)" in labels
+        assert "Signet of Momentum (Finger 1)" in labels
+        assert "Signet of Momentum (Finger 2)" in labels
+        assert all(" + " not in label for label in labels)
+
+    def test_build_variant_specs_routes_same_ring_to_open_slot_only(self):
+        simc_import = [
+            'druid="Tester"\n',
+            "spec=balance\n",
+            "talents=CYGAAAAAAAAAAAAAAAAAAAAA\n",
+            "finger1=,id=555555\n",
+            "finger2=,id=222222\n",
+            "### Weekly Reward Choices\n",
+            "# Bifurcation Band (678)\n",
+            "# finger=,id=555555\n",
+            "### End of Weekly Reward Choices\n",
+        ]
+        reward_items = [
+            ("Bifurcation Band", "finger=,id=555555", 5, 8),
+        ]
+
+        variants = _build_variant_specs(
+            reward_items,
+            _get_equipped_items_from_import(simc_import),
+        )
+        labels = [label for label, *_ in variants]
+
+        assert labels == ["Bifurcation Band (Finger 2)"]
+
+    def test_build_variant_specs_copies_equipped_affixes_when_enabled(self):
+        simc_import = [
+            'druid="Tester"\n',
+            "spec=balance\n",
+            "talents=CYGAAAAAAAAAAAAAAAAAAAAA\n",
+            "finger1=,id=111111,enchant_id=9001,gem_id=8001\n",
+            "finger2=,id=222222,enchant_id=9002,gem_id=8002\n",
+            "### Weekly Reward Choices\n",
+            "# Bifurcation Band (678)\n",
+            "# finger=,id=555555\n",
+            "### End of Weekly Reward Choices\n",
+        ]
+        reward_items = [
+            ("Bifurcation Band", "finger=,id=555555", 5, 8),
+        ]
+
+        variants = _build_variant_specs(
+            reward_items,
+            _get_equipped_items_from_import(simc_import),
+            apply_equipped_modifiers=True,
+        )
+
+        section_maps = dict(variants)[ "Bifurcation Band (Finger 1)" ]
+        replacement_line = section_maps[(5, 8)]["finger=,id=555555"]
+        assert "enchant_id=9001" in replacement_line
+        assert "gem_id=8001" in replacement_line
+
+    def test_build_variant_specs_does_not_pair_vault_and_bag_rings(self):
+        simc_import = [
+            'druid="Tester"\n',
+            "spec=balance\n",
+            "talents=CYGAAAAAAAAAAAAAAAAAAAAA\n",
+            "finger1=,id=111111\n",
+            "finger2=,id=222222\n",
+            "### Weekly Reward Choices\n",
+            "# Bifurcation Band (678)\n",
+            "# finger=,id=555555\n",
+            "### End of Weekly Reward Choices\n",
+            "### Gear from Bags\n",
+            "# Signet of Momentum (678)\n",
+            "# finger=,id=666666\n",
+        ]
+        reward_items = [
+            ("Bifurcation Band", "finger=,id=555555", 5, 8),
+            ("Signet of Momentum", "finger=,id=666666", 9, 11),
+        ]
+
+        variants = _build_variant_specs(
+            reward_items,
+            _get_equipped_items_from_import(simc_import),
+        )
+        labels = {label for label, *_ in variants}
+
+        assert "Bifurcation Band (Finger 1)" in labels
+        assert "Bifurcation Band (Finger 2)" in labels
+        assert "Signet of Momentum (Finger 1)" in labels
+        assert "Signet of Momentum (Finger 2)" in labels
+        assert all(" + " not in label for label in labels)
+
+    def test_clean_variant_filename_truncates_long_labels_stably(self):
+        label = (
+            "Very Long Trinket Name Alpha (Trinket 1) + "
+            "Very Long Trinket Name Beta (Trinket 2) + "
+            "Very Long Trinket Name Gamma (Trinket 1)"
+        )
+        clean = _clean_variant_filename(label)
+
+        assert len(clean) <= 110
+        assert clean == _clean_variant_filename(label)
+
+    def test_generated_variant_label_lookup_returns_full_label(self):
+        generated_variant_labels.clear()
+        generated_variant_labels["short_name_a1b2c3"] = "Bifurcation Band (Finger 1)"
+
+        assert get_generated_variant_label("short_name_a1b2c3") == "Bifurcation Band (Finger 1)"

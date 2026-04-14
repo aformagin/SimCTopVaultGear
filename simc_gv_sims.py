@@ -109,7 +109,11 @@ def run_simc_against_vault():
             dps_max = dps_data.get("max", 0)
             dps_mean = dps_data.get("mean", 0)
             dps_min = dps_data.get("min", 0)
-            item_name = simc_file.replace(".simc", "").replace("_", " ")  # Convert filename to readable item name
+            item_stem = simc_file.replace(".simc", "")
+            item_name = (
+                simc_gv_generator.get_generated_variant_label(item_stem)
+                or item_stem.replace("_", " ")
+            )
 
             dps_results.append((item_name, dps_mean, dps_min, dps_max))
             print(f"Processed: {item_name} -> Mean DPS: {dps_mean}")

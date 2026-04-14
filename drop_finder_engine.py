@@ -20,6 +20,7 @@ from profileset_generator import (
     _unique_label,
     _resolve_target_slots,
 )
+from item_affixes import apply_reference_item_affixes
 
 # ---------------------------------------------------------------------------
 # WoW class name -> class ID mapping (matches SimC character_class strings)
@@ -202,6 +203,10 @@ def generate_droptimizer_input(
         target_slots = _resolve_target_slots(item.slot, item, parse_result.equipped)
         for target_slot in target_slots:
             gear_str = _reslot_item(item.simc_string, target_slot)
+            if options.copy_equipped_enchants_gems:
+                equipped_item = parse_result.equipped.get(target_slot)
+                if equipped_item:
+                    gear_str = apply_reference_item_affixes(gear_str, equipped_item.simc_string)
             label = _make_label(item.name or f"item_{item.item_id}", target_slot)
             label = _unique_label(label, combo_metadata)
             profileset_lines.append(f'profileset."{label}"+={gear_str}')

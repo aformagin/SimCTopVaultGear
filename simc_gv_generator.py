@@ -1,7 +1,9 @@
 import os
 import re
+import hashlib
 from dataclasses import dataclass
 from typing import Optional
+from item_affixes import apply_reference_item_affixes
 
 # ---------------------------------------------------------------------------
 # Constants
@@ -12,6 +14,9 @@ input_filename = "character-simc-string.txt"
 # Output directory for modified SimC files (legacy pipeline)
 output_dir = "simc_weekly_rewards_variants"
 os.makedirs(output_dir, exist_ok=True)
+
+# filename stem -> human-readable label for the current generated variant set
+generated_variant_labels = {}
 
 # Gear slots that affect DPS
 GEAR_SLOTS = frozenset({
@@ -351,6 +356,116 @@ def parse_weekly_rewards(weekly_rewards):
 
     return reward_items
 
+
+def _get_equipped_items_from_import(simc_import):
+    parsed = parse_simc_addon("".join(simc_import))
+    return parsed.equipped
+
+
+def _resolve_target_slots(slot: str, item_id: Optional[int], equipped: dict) -> list:
+    """Return valid physical slot targets for an item line.
+
+    Rings and trinkets can occupy either paired slot unless the same item is
+    already equipped in one of them, in which case only the other slot is valid.
+    """
+    for _base, (s1, s2) in PAIRED_SLOTS.items():
+        if slot in (s1, s2, _base):
+            eq_s1 = equipped.get(s1)
+            eq_s2 = equipped.get(s2)
+            if item_id is not None:
+                if eq_s1 and eq_s1.item_id == item_id and slot != s2:
+                    return [s2]
+                if eq_s2 and eq_s2.item_id == item_id and slot != s1:
+                    return [s1]
+            return [s1, s2]
+    return [slot]
+
+
+def _legacy_item_id(gear_line: str) -> Optional[int]:
+    match = re.search(r"id=(\d+)", gear_line)
+    return int(match.group(1)) if match else None
+
+
+def _legacy_item_slot(gear_line: str) -> Optional[str]:
+    slot = _extract_slot(gear_line)
+    return slot if slot in GEAR_SLOTS or slot in PAIRED_SLOTS else slot
+
+
+def _reslot_gear_line(gear_line: str, target_slot: str) -> str:
+    return re.sub(r"^\w+=", f"{target_slot}=", gear_line)
+
+
+def _slot_display_name(slot: str) -> str:
+    display_names = {
+        "finger1": "Finger 1",
+        "finger2": "Finger 2",
+        "trinket1": "Trinket 1",
+        "trinket2": "Trinket 2",
+    }
+    return display_names.get(slot, slot.replace("_", " ").title())
+
+
+def _build_variant_label(assignments: list[tuple[str, str]]) -> str:
+    parts = [f"{name} ({_slot_display_name(slot)})" for name, slot in assignments]
+    return " + ".join(parts)
+
+
+def _clean_variant_filename(label: str) -> str:
+    clean_name = label.replace(" ", "_")
+    for ch in ':<>\"|?*/\\':
+        clean_name = clean_name.replace(ch, "_")
+    clean_name = clean_name.strip("._")
+    max_len = 110
+    if len(clean_name) <= max_len:
+        return clean_name
+    digest = hashlib.md5(label.encode("utf-8")).hexdigest()[:10]
+    trimmed = clean_name[: max_len - len(digest) - 1].rstrip("._")
+    return f"{trimmed}_{digest}"
+
+
+def get_generated_variant_label(stem: str) -> Optional[str]:
+    return generated_variant_labels.get(stem)
+
+
+def _build_variant_specs(reward_items, equipped: dict, apply_equipped_modifiers: bool = False):
+    """Expand legacy reward items into slot-aware single-item variants."""
+    variants = []
+    seen_signatures = set()
+
+    for item_name, gear_line, sec_start, sec_end in reward_items:
+        slot = _legacy_item_slot(gear_line)
+        item_id = _legacy_item_id(gear_line)
+        target_slots = _resolve_target_slots(slot, item_id, equipped)
+
+        for target_slot in target_slots:
+            label = _build_variant_label([(item_name, target_slot)])
+            replacement_line = _reslot_gear_line(gear_line, target_slot)
+            if apply_equipped_modifiers:
+                equipped_item = equipped.get(target_slot)
+                if equipped_item:
+                    replacement_line = apply_reference_item_affixes(
+                        replacement_line,
+                        equipped_item.simc_string,
+                    )
+            section_maps = {
+                (sec_start, sec_end): {gear_line: replacement_line}
+            }
+            signature = tuple(
+                sorted(
+                    (
+                        sec_range,
+                        tuple(sorted(section_replacements.items())),
+                    )
+                    for sec_range, section_replacements in section_maps.items()
+                )
+            )
+            if signature in seen_signatures:
+                continue
+            seen_signatures.add(signature)
+            variants.append((label, section_maps))
+
+    return variants
+
 def clear_simc_files(directory):
     """Deletes all .simc files in the specified directory."""
     if not os.path.exists(directory):
@@ -406,36 +521,48 @@ def define_start_end_bags(simc_import):
 # Generates the modified SimC files from a extracted reward items list.
 # Each item in reward_items is a (name, gear_line, sec_start, sec_end) tuple carrying
 # its own section range so vault and bag items are handled uniformly.
-def generate_mod_simc_file(reward_items, simc_import):
+def generate_mod_simc_file(reward_items, simc_import, apply_equipped_modifiers: bool = False):
     # Clear out old gear files before creating new ones
     clear_simc_files(output_dir)
+    equipped = _get_equipped_items_from_import(simc_import)
+    generated_variant_labels.clear()
 
     # Write the unmodified character as Baseline.simc so the sim pipeline can
     # measure current-gear DPS alongside every vault/bag variant.
     baseline_filename = f"{output_dir}/Baseline.simc"
     with open(baseline_filename, "w", encoding="utf-8") as f:
         f.writelines(simc_import)
+    generated_variant_labels["Baseline"] = "Baseline"
     print(f"Generated: {baseline_filename}")
 
     # Generate modified SimC files
-    for item_name, gear_line, sec_start, sec_end in reward_items:
+    for label, section_maps in _build_variant_specs(
+        reward_items,
+        equipped,
+        apply_equipped_modifiers=apply_equipped_modifiers,
+    ):
         modified_simc = simc_import[:]  # Copy original lines
 
-        # Within the item's source section, uncomment only its gear line
-        # and ensure all other commented lines stay commented.
-        for i in range(sec_start, sec_end + 1):
-            if modified_simc[i].startswith("# "):  # Commented lines
-                if gear_line in modified_simc[i]:
-                    modified_simc[i] = gear_line + "\n"  # Uncomment the current item
-                else:
-                    modified_simc[i] = "# " + modified_simc[i].lstrip("# ").strip() + "\n"  # Keep others commented
+        # Within each relevant source section, uncomment the selected gear line(s)
+        # and keep all other vault/bag entries commented.
+        for (sec_start, sec_end), replacement_map in section_maps.items():
+            for i in range(sec_start, sec_end + 1):
+                if modified_simc[i].startswith("# "):  # Commented lines
+                    matched_gear_line = next(
+                        (gear_line for gear_line in replacement_map if gear_line in modified_simc[i]),
+                        None,
+                    )
+                    if matched_gear_line:
+                        modified_simc[i] = replacement_map[matched_gear_line] + "\n"
+                    else:
+                        modified_simc[i] = "# " + modified_simc[i].lstrip("# ").strip() + "\n"  # Keep others commented
 
-        # Save to file with item name
-        # Clean filename by removing invalid Windows characters
-        clean_name = item_name.replace(' ', '_').replace(':', '_').replace('<', '_').replace('>', '_').replace('"', '_').replace('|', '_').replace('?', '_').replace('*', '_').replace('/', '_').replace('\\', '_')
+        # Save to file with a slot-aware human label.
+        clean_name = _clean_variant_filename(label)
         filename = f"{output_dir}/{clean_name}.simc"
         with open(filename, "w") as f:
             f.writelines(modified_simc)
+        generated_variant_labels[clean_name] = label
 
         print(f"Generated: {filename}")
 

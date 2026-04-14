@@ -15,6 +15,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 
 from simc_gv_generator import ParseResult, ParsedItem, GEAR_SLOTS, PAIRED_SLOTS
+from item_affixes import apply_reference_item_affixes
 
 
 @dataclass
@@ -25,6 +26,7 @@ class SimOptions:
     target_error: float = 0.2
     threads: int = 4
     iterations: int = 0   # 0 = use target_error, >0 = fixed iterations
+    copy_equipped_enchants_gems: bool = False
 
 
 # ---------------------------------------------------------------------------
@@ -83,6 +85,10 @@ def generate_drop_finder_input(
         target_slots = _resolve_target_slots(bag_item.slot, bag_item, result.equipped)
         for target_slot in target_slots:
             gear_str = _reslot_item(bag_item.simc_string, target_slot)
+            if options.copy_equipped_enchants_gems:
+                equipped_item = result.equipped.get(target_slot)
+                if equipped_item:
+                    gear_str = apply_reference_item_affixes(gear_str, equipped_item.simc_string)
             label = _make_label(bag_item.name or f"item_{bag_item.item_id}", target_slot)
             # Ensure label uniqueness
             label = _unique_label(label, combo_metadata)
@@ -159,6 +165,10 @@ def generate_top_gear_input(
             if item is None:
                 continue
             gear_str = _reslot_item(item.simc_string, slot_name)
+            if options.copy_equipped_enchants_gems:
+                equipped_item = result.equipped.get(slot_name)
+                if equipped_item:
+                    gear_str = apply_reference_item_affixes(gear_str, equipped_item.simc_string)
             profileset_lines.append(f'profileset."{label}"+={gear_str}')
             changed_items.append(item)
         combo_metadata[label] = changed_items

@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.raidbots.com)",
+      "Bash(curl:*)",
+      "Bash(python3:*)",
+      "Bash(venv/Scripts/python:*)"
+    ]
+  }
+}

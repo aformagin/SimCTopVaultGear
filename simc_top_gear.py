@@ -166,17 +166,27 @@ class WorkerSignals(QObject):
 
 class SimWorker(QRunnable):
     """Legacy Great Vault worker — runs one simc process per .simc file."""
-    def __init__(self, rewards, simc_import):
+    def __init__(self, rewards, simc_import, apply_equipped_modifiers=False):
         super().__init__()
         self.signals = WorkerSignals()
         self.rewards = rewards
         self.simc_import = simc_import
+        self.apply_equipped_modifiers = apply_equipped_modifiers
 
     def run(self):
-        ggv.generate_mod_simc_file(self.rewards, self.simc_import)
-        result = sim.run_simc_against_vault()
-        if result[0] is not None:
-            self.signals.finished.emit(result)
+        try:
+            ggv.generate_mod_simc_file(
+                self.rewards,
+                self.simc_import,
+                apply_equipped_modifiers=self.apply_equipped_modifiers,
+            )
+            result = sim.run_simc_against_vault()
+            if result[0] is not None:
+                self.signals.finished.emit(result)
+            else:
+                self.signals.error.emit("No valid DPS data was found.")
+        except Exception as exc:
+            self.signals.error.emit(str(exc))
 
 
 class TopGearWorker(QRunnable):
@@ -417,7 +427,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def _make_options_group(self, prefix):
         """Create a Sim Options group box.
 
-        Returns (group, fight_combo, terror_spin, threads_spin, maxtime_spin).
+        Returns (group, fight_combo, terror_spin, threads_spin, maxtime_spin, affix_checkbox).
         """
         group = QtWidgets.QGroupBox("Sim Options")
         row = QtWidgets.QHBoxLayout(group)
@@ -444,6 +454,7 @@ class MainWindow(QtWidgets.QMainWindow):
         maxtime_spin.setSingleStep(30)
         maxtime_spin.setValue(300)
         maxtime_spin.setFixedWidth(68)
+        affix_checkbox = QtWidgets.QCheckBox("Copy equipped enchant/gem IDs")
 
         for label_text, widget in (
             ("Fight Style:", fight_combo),
@@ -453,9 +464,10 @@ class MainWindow(QtWidgets.QMainWindow):
         ):
             row.addWidget(QtWidgets.QLabel(label_text))
             row.addWidget(widget)
+        row.addWidget(affix_checkbox)
         row.addStretch()
 
-        return group, fight_combo, terror_spin, threads_spin, maxtime_spin
+        return group, fight_combo, terror_spin, threads_spin, maxtime_spin, affix_checkbox
 
     def _make_results_table(self):
         tbl = QtWidgets.QTableWidget(0, 5)
@@ -486,11 +498,12 @@ class MainWindow(QtWidgets.QMainWindow):
         self.gatherVaultBtn = QtWidgets.QPushButton("Gather Gear")
         self.gatherVaultBtn.setStyleSheet(BTN_RED)
         self.includeBagsCheckBox = QtWidgets.QCheckBox("Include Bag Items")
+        self.gv_affix_checkbox = QtWidgets.QCheckBox("Copy equipped enchant/gem IDs")
         self.removeItemBtn = QtWidgets.QPushButton("Remove Item")
         self.removeItemBtn.setStyleSheet(BTN_RED)
         self.clearItemsBtn = QtWidgets.QPushButton("Clear Items")
         self.clearItemsBtn.setStyleSheet(BTN_RED)
-        for w in (self.gatherVaultBtn, self.includeBagsCheckBox,
+        for w in (self.gatherVaultBtn, self.includeBagsCheckBox, self.gv_affix_checkbox,
                   self.removeItemBtn, self.clearItemsBtn):
             ctrl.addWidget(w)
         ctrl.addStretch()
@@ -556,7 +569,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # ---- Sim Options ----
         (opts_group, self.dfe_fight_combo, self.dfe_terror_spin,
-         self.dfe_threads_spin, self.dfe_maxtime_spin) = self._make_options_group("dfe")
+         self.dfe_threads_spin, self.dfe_maxtime_spin,
+         self.dfe_affix_checkbox) = self._make_options_group("dfe")
         layout.addWidget(opts_group)
 
         # ---- Source selectors ----
@@ -653,7 +667,8 @@ class MainWindow(QtWidgets.QMainWindow):
         layout.setSpacing(6)
 
         (opts_group, self.tg_fight_combo, self.tg_terror_spin,
-         self.tg_threads_spin, self.tg_maxtime_spin) = self._make_options_group("tg")
+         self.tg_threads_spin, self.tg_maxtime_spin,
+         self.tg_affix_checkbox) = self._make_options_group("tg")
         layout.addWidget(opts_group)
 
         # ---- Filters ----
@@ -670,6 +685,7 @@ class MainWindow(QtWidgets.QMainWindow):
             ("263+  (Hero M+)", 263),
             ("272+  (Heroic Raid)", 272),
             ("276+  (Myth M+)", 276),
+            ("298+  (Voidcore Modified)", 298),
         ]:
             self.tg_ilvl_combo.addItem(label, userData=val)
         filter_row.addWidget(self.tg_ilvl_combo)
@@ -843,12 +859,20 @@ class MainWindow(QtWidgets.QMainWindow):
                 selected.append(bag_items[i])
         return selected
 
-    def _make_sim_options(self, fight_combo, terror_spin, threads_spin, maxtime_spin):
+    def _make_sim_options(
+        self,
+        fight_combo,
+        terror_spin,
+        threads_spin,
+        maxtime_spin,
+        affix_checkbox,
+    ):
         return SimOptions(
             fight_style=fight_combo.currentText(),
             target_error=terror_spin.value(),
             threads=threads_spin.value(),
             max_time=maxtime_spin.value(),
+            copy_equipped_enchants_gems=affix_checkbox.isChecked(),
         )
 
     def _fill_results_table(self, table, sim_results, label_map=None):
@@ -1031,6 +1055,7 @@ class MainWindow(QtWidgets.QMainWindow):
         options = self._make_sim_options(
             self.dfe_fight_combo, self.dfe_terror_spin,
             self.dfe_threads_spin, self.dfe_maxtime_spin,
+            self.dfe_affix_checkbox,
         )
 
         inst_name = self.dfe_instance_combo.currentText()
@@ -1102,8 +1127,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.bestItemLine.setText("Running Sim...")
         self.runSimBtn.setEnabled(False)
         self.exitBtn.setEnabled(False)
-        worker = SimWorker(self.rewards, self.simc_import)
+        worker = SimWorker(
+            self.rewards,
+            self.simc_import,
+            apply_equipped_modifiers=self.gv_affix_checkbox.isChecked(),
+        )
         worker.signals.finished.connect(self._gv_on_finished)
+        worker.signals.error.connect(self._gv_on_error)
         self.threadpool.start(worker)
 
     def _gv_on_finished(self, result):
@@ -1113,6 +1143,12 @@ class MainWindow(QtWidgets.QMainWindow):
             self.estDPSLine.setText(f"{'%.2f' % best_item[1]}")
         self.all_dps_results = all_results
         self.detailsBtn.setEnabled(True)
+        self.runSimBtn.setEnabled(True)
+        self.exitBtn.setEnabled(True)
+
+    def _gv_on_error(self, msg):
+        self.bestItemLine.setText(f"Error: {msg}")
+        self.estDPSLine.clear()
         self.runSimBtn.setEnabled(True)
         self.exitBtn.setEnabled(True)
 
@@ -1269,6 +1305,7 @@ class MainWindow(QtWidgets.QMainWindow):
         options = self._make_sim_options(
             self.tg_fight_combo, self.tg_terror_spin,
             self.tg_threads_spin, self.tg_maxtime_spin,
+            self.tg_affix_checkbox,
         )
         config = TopGearConfig(
             simc_executable=exe,

@@ -138,6 +138,16 @@ class TestDropFinderInput:
         _, meta = generate_drop_finder_input(parsed, options, bag_items=one_item)
         assert len(meta) >= 1
 
+    def test_copy_equipped_enchants_gems_for_ring_target_slot(self, parsed, options):
+        ring = next(i for i in parsed.bag_items if i.item_id == 193708)
+        options.copy_equipped_enchants_gems = True
+
+        simc_input, _ = generate_drop_finder_input(parsed, options, bag_items=[ring])
+
+        assert "finger2=,id=193708" in simc_input
+        assert "enchant_id=7968" in simc_input
+        assert "gem_id=240891" in simc_input
+
 
 # ---------------------------------------------------------------------------
 # generate_top_gear_input
@@ -184,6 +194,18 @@ class TestTopGearInput:
             parsed, options=options, selected_bag_items=small_set
         )
         assert 'druid="Gotmilkferya"' in simc_input
+
+    def test_top_gear_copies_equipped_enchants_gems_when_enabled(self, parsed, options):
+        ring = next(i for i in parsed.bag_items if i.item_id == 193708)
+        options.copy_equipped_enchants_gems = True
+
+        simc_input, _ = generate_top_gear_input(
+            parsed, options=options, selected_bag_items=[ring], max_combinations=10
+        )
+
+        assert "finger2=,id=193708" in simc_input
+        assert "enchant_id=7968" in simc_input
+        assert "gem_id=240891" in simc_input
 
 
 # ---------------------------------------------------------------------------

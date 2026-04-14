@@ -339,6 +339,25 @@ class TestGenerateDroptimizer:
         simc_input, _ = generate_droptimizer_input(parse_result, parsed_items, SimOptions())
         assert "ilevel=263" in simc_input
 
+    def test_copy_equipped_ring_affixes_when_enabled(self, sample_text):
+        from simc_gv_generator import parse_simc_addon
+
+        raw = [{"id": 999, "name": "Magic Ring", "slot": "finger1", "class_mask": -1}]
+        parsed_items = loot_items_to_parsed(raw, ilvl=250)
+        parse_result = parse_simc_addon(sample_text)
+
+        simc_input, combo_meta = generate_droptimizer_input(
+            parse_result,
+            parsed_items,
+            SimOptions(copy_equipped_enchants_gems=True),
+        )
+
+        assert len(combo_meta) == 2
+        assert "enchant_id=7969" in simc_input
+        assert "gem_id=240983" in simc_input
+        assert "enchant_id=7968" in simc_input
+        assert "gem_id=240891" in simc_input
+
 
 # ---------------------------------------------------------------------------
 # load_drop_sources (integration with real file)
