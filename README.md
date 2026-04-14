@@ -9,7 +9,7 @@ Picks the best item from your weekly Great Vault choices.
 
 - Parses vault reward options from your SimC export string (`### Weekly Reward Choices`)
 - Optionally includes bag items alongside vault rewards
-- Runs one simulation per candidate item and compares mean DPS
+- Runs one simulation for all candidate items using profilesets (fast)
 - Reports the best choice and a full DPS breakdown
 
 **When to use**: On reset day when you need to pick one of your three vault slots.
@@ -22,7 +22,7 @@ Identifies which dungeons and raids are worth running for your character (Dropti
 - Pulls loot tables from `data/drop_sources.json` (generated from the Blizzard Game Data API)
 - Select a source type (M+ Dungeons or Raids), a specific instance, a boss (or all bosses), and an item level track (Champion / Hero / Myth for dungeons; LFR / Normal / Heroic / Mythic for raids)
 - Items are automatically filtered to your character's class based on your parsed SimC string
-- Each item is simulated independently — one profileset per item — against your current equipped gear
+- Each item is simulated independently against your current equipped gear
 - Results are ranked by DPS gain, showing which drops are the biggest upgrades
 
 **When to use**: Deciding which dungeon key or raid difficulty to run this week to maximize your chances of a meaningful upgrade.
@@ -94,17 +94,18 @@ Output: `dist\simc_top_gear.exe` — no Python installation required to run.
 ```
 SimCTopVaultGear/
 ├── simc_top_gear.py           # Main GUI (PyQt5)
-├── simc_gv_generator.py       # SimC string parser (ParsedItem, ParseResult)
-├── simc_gv_sims.py            # Legacy Great Vault simc runner
-├── profileset_generator.py    # Builds simc profileset input strings
 ├── top_gear_engine.py         # Orchestrates parse → profilesets → simc → results
+├── profileset_generator.py    # Builds simc profileset input strings
+├── simc_gv_generator.py       # SimC string parser (ParsedItem, ParseResult)
 ├── result_parser.py           # Parses simc json2=stdout into SimResult objects
-├── drop_finder_engine.py      # Drop Finder: loads loot tables, filters, builds profilesets
+├── drop_finder_engine.py      # Drop Finder: loads loot tables, filters, items
+├── item_filters.py            # Item compatibility filtering
+├── item_affixes.py            # Handles enchants and gems for bag items
 ├── data/
 │   └── drop_sources.json      # Loot tables (instances, bosses, items, ilvl tracks)
 ├── scripts/
 │   └── generate_drop_sources.py  # Regenerate drop_sources.json via Blizzard API
-├── tests/                     # pytest test suite (161 tests)
+├── tests/                     # pytest test suite
 ├── requirements.txt
 ├── setup_venv.ps1 / .bat
 ├── build.ps1 / .bat
@@ -127,11 +128,6 @@ SimCTopVaultGear/
    ```
 
 This fetches current-season M+ dungeons and raid instances from the Blizzard Game Data API and downloads item metadata from Raidbots static files.
-
-## Troubleshooting
-
-**"SimulationCraft executable not found"**
-Place `simc.exe` in the same directory as the project, or use the Browse button in the app to set the path manually.
 
 **"PyQt5 import failed" or DLL errors**
 Use Python 3.11. Reinstall with `pip uninstall PyQt5 && pip install PyQt5==5.15.9`.

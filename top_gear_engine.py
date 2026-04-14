@@ -14,6 +14,8 @@ import json
 import os
 import re
 import subprocess
+import sys
+import shutil
 import tempfile
 from dataclasses import dataclass, field
 from typing import Optional
@@ -26,6 +28,44 @@ from profileset_generator import (
     count_top_gear_combinations,
 )
 from result_parser import parse_results, SimResult
+
+
+def find_simc_executable():
+    """Find simc.exe in multiple possible locations"""
+    
+    # Possible names for the SimulationCraft executable
+    possible_names = ["simc.exe", "SimulationCraft.exe"]
+    
+    # Get the directory where this script/exe is located
+    if getattr(sys, 'frozen', False):
+        # Running as PyInstaller executable
+        script_dir = os.path.dirname(sys.executable)
+    else:
+        # Running as Python script
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Search locations in order of preference
+    search_locations = [
+        os.path.join(script_dir, "simc"),  # simc subfolder in script directory
+        os.path.join(os.getcwd(), "simc"),  # simc subfolder in current working directory
+        script_dir,  # Same directory as the application
+        os.getcwd(),  # Current working directory
+    ]
+    
+    # Check each location for each possible executable name
+    for location in search_locations:
+        for name in possible_names:
+            full_path = os.path.join(location, name)
+            if os.path.isfile(full_path):
+                return full_path
+    
+    # Try to find in system PATH
+    for name in possible_names:
+        path_location = shutil.which(name)
+        if path_location:
+            return path_location
+    
+    return None
 
 
 @dataclass

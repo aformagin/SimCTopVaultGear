@@ -56,7 +56,7 @@ def build_base_input(result: ParseResult, options: SimOptions) -> str:
 
 def generate_drop_finder_input(
     result: ParseResult,
-    options: SimOptions,
+    options: Optional[SimOptions] = None,
     bag_items: Optional[list] = None,
 ) -> tuple:
     """Generate simc profileset input for Drop Finder (Droptimizer) mode.
@@ -74,6 +74,8 @@ def generate_drop_finder_input(
         (simc_input_string, combo_metadata)
         combo_metadata: {profileset_label -> ParsedItem}
     """
+    if options is None:
+        options = SimOptions()
     if bag_items is None:
         bag_items = result.bag_items
 

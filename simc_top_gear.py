@@ -4,10 +4,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThreadPool, QRunnable, pyqtSignal, QObject
 
 import simc_gv_generator as ggv
-import simc_gv_sims as sim
 from simc_gv_generator import parse_simc_addon
 from profileset_generator import SimOptions, count_top_gear_combinations
-from top_gear_engine import run_top_gear, TopGearConfig, run_simc_with_input
+from top_gear_engine import run_top_gear, TopGearConfig, run_simc_with_input, find_simc_executable
 from result_parser import parse_results
 from item_filters import (
     load_equippable_item_metadata,
@@ -164,31 +163,6 @@ class WorkerSignals(QObject):
     error = pyqtSignal(str)
 
 
-class SimWorker(QRunnable):
-    """Legacy Great Vault worker — runs one simc process per .simc file."""
-    def __init__(self, rewards, simc_import, apply_equipped_modifiers=False):
-        super().__init__()
-        self.signals = WorkerSignals()
-        self.rewards = rewards
-        self.simc_import = simc_import
-        self.apply_equipped_modifiers = apply_equipped_modifiers
-
-    def run(self):
-        try:
-            ggv.generate_mod_simc_file(
-                self.rewards,
-                self.simc_import,
-                apply_equipped_modifiers=self.apply_equipped_modifiers,
-            )
-            result = sim.run_simc_against_vault()
-            if result[0] is not None:
-                self.signals.finished.emit(result)
-            else:
-                self.signals.error.emit("No valid DPS data was found.")
-        except Exception as exc:
-            self.signals.error.emit(str(exc))
-
-
 class TopGearWorker(QRunnable):
     """Worker for Top Gear — single simc run via profilesets."""
     def __init__(self, simc_text, config):
@@ -341,7 +315,7 @@ class MainWindow(QtWidgets.QMainWindow):
         exe_row.addWidget(QtWidgets.QLabel("simc Executable:"))
         self.simcExeLine = QtWidgets.QLineEdit()
         self.simcExeLine.setPlaceholderText("Path to simc.exe  (auto-detected if blank)")
-        detected = sim.find_simc_executable()
+        detected = find_simc_executable()
         if detected:
             self.simcExeLine.setText(detected)
         self.browseSimcBtn = QtWidgets.QPushButton("Browse…")
@@ -821,7 +795,7 @@ class MainWindow(QtWidgets.QMainWindow):
         path = self.simcExeLine.text().strip()
         if path:
             return path
-        found = sim.find_simc_executable()
+        found = find_simc_executable()
         if found:
             self.simcExeLine.setText(found)
         return found
@@ -1092,56 +1066,102 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_gather_vault_click(self):
         import_string = self._get_import_text()
-        include_bags = self.includeBagsCheckBox.isChecked()
-        vals = ggv.generate_vault_rewards_from_file(import_string, include_bags=include_bags)
-        if vals is None:
-            print("Empty string inputted")
+        if not import_string:
+            self._set_status_text(self.bestItemLine, "Paste an import string first.")
             return
-        if vals.count == 0:
-            print("WR404-WR Not found or empty")
-            return
-        self.clear_vault_items()
-        self.rewards = vals[0]
-        self.simc_import = vals[1]
-        self.start_end[0] = vals[2]
-        self.start_end[1] = vals[3]
-        for i, reward in enumerate(self.rewards, 1):
-            print(f"[{i}] {reward[0]}")
-            self.vaultItemList.insertItem(i, reward[0])
+        try:
+            self._parse_result = parse_simc_addon(import_string)
+            include_bags = self.includeBagsCheckBox.isChecked()
+            
+            # Filter for vault items (and optionally bag items)
+            vault_items = [i for i in self._parse_result.bag_items if i.origin == "vault"]
+            if include_bags:
+                bag_only = [i for i in self._parse_result.bag_items if i.origin == "bag"]
+                vault_items.extend(bag_only)
+            
+            self.clear_vault_items()
+            self._gv_items = vault_items
+            
+            if not self._gv_items:
+                self.bestItemLine.setText("No vault/bag items found.")
+                return
+                
+            for i, item in enumerate(self._gv_items, 1):
+                name = item.name or f"ID {item.item_id}"
+                slot = item.slot.replace("_", " ").title()
+                self.vaultItemList.addItem(f"{name} ({slot})")
+            
+            self.bestItemLine.setText("Awaiting sim...")
+        except Exception as exc:
+            self.bestItemLine.setText(f"Parse error: {exc}")
 
     def clear_vault_items(self):
-        self.rewards = []
+        self._gv_items = []
         self.vaultItemList.clear()
 
     def remove_vault_item(self):
         row = self.vaultItemList.currentRow()
         if row < 0:
             return
-        self.rewards.pop(row)
+        self._gv_items.pop(row)
         self.vaultItemList.takeItem(row)
 
     def run_sim(self):
-        if not self.rewards or not self.simc_import:
-            self.bestItemLine.setText("Error: Missing parameters.")
+        if not self._gv_items:
+            self.bestItemLine.setText("Error: No items to sim.")
             return
+        exe = self._get_simc_exe()
+        if not exe:
+            self.bestItemLine.setText("Error: simc.exe not found.")
+            return
+
         self.bestItemLine.setText("Running Sim...")
         self.runSimBtn.setEnabled(False)
         self.exitBtn.setEnabled(False)
-        worker = SimWorker(
-            self.rewards,
-            self.simc_import,
-            apply_equipped_modifiers=self.gv_affix_checkbox.isChecked(),
+        
+        options = self._make_sim_options(
+            # We don't have explicit fight combos for GV tab in the UI currently,
+            # so we'll use defaults or borrow from another tab.
+            # Actually, let's add them or just use Top Gear options if available.
+            self.tg_fight_combo, self.tg_terror_spin,
+            self.tg_threads_spin, self.tg_maxtime_spin,
+            self.gv_affix_checkbox,
         )
+        
+        config = TopGearConfig(
+            simc_executable=exe,
+            options=options,
+            mode="drop_finder", # Independent sims for each item
+            selected_bag_items=self._gv_items,
+        )
+        
+        worker = TopGearWorker(self._get_import_text(), config)
         worker.signals.finished.connect(self._gv_on_finished)
         worker.signals.error.connect(self._gv_on_error)
         self.threadpool.start(worker)
 
     def _gv_on_finished(self, result):
-        best_item, all_results = result
-        if best_item:
-            self.bestItemLine.setText(f"{best_item[0]}")
-            self.estDPSLine.setText(f"{'%.2f' % best_item[1]}")
-        self.all_dps_results = all_results
+        _, sim_results, combo_meta = result
+        self.all_dps_results = sim_results
+        self.combo_meta = combo_meta
+        
+        # Find best non-baseline result
+        best = None
+        for res in sim_results:
+            if res.label != "Baseline":
+                if best is None or res.dps > best.dps:
+                    best = res
+        
+        if best:
+            display_name = best.label
+            if best.label in combo_meta:
+                item = combo_meta[best.label]
+                display_name = item.name or f"ID {item.item_id}"
+            self.bestItemLine.setText(display_name)
+            self.estDPSLine.setText(f"{best.dps:,.2f}")
+        else:
+            self.bestItemLine.setText("No results found.")
+            
         self.detailsBtn.setEnabled(True)
         self.runSimBtn.setEnabled(True)
         self.exitBtn.setEnabled(True)
@@ -1155,16 +1175,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def show_dps_details(self):
         dialog = QtWidgets.QDialog(self)
         dialog.setWindowTitle("DPS Breakdown")
-        dialog.setMinimumWidth(440)
+        dialog.setMinimumWidth(500)
         layout = QtWidgets.QVBoxLayout(dialog)
 
-        baseline = next((r for r in self.all_dps_results if r[0] == "Baseline"), None)
+        baseline = next((r for r in self.all_dps_results if r.label == "Baseline"), None)
         items = sorted(
-            [r for r in self.all_dps_results if r[0] != "Baseline"],
-            key=lambda x: x[1], reverse=True,
+            [r for r in self.all_dps_results if r.label != "Baseline"],
+            key=lambda x: x.dps, reverse=True,
         )
         if baseline:
-            lbl = QtWidgets.QLabel(f"Baseline (Equipped):  {baseline[1]:,.2f} DPS")
+            lbl = QtWidgets.QLabel(f"Baseline (Equipped):  {baseline.dps:,.2f} DPS")
             lbl.setStyleSheet(
                 "font-weight: bold; font-size: 12px; padding: 6px;"
                 "background: #222; color: #ddd; border-radius: 4px;"
@@ -1178,12 +1198,17 @@ class MainWindow(QtWidgets.QMainWindow):
         table.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
         table.verticalHeader().setVisible(False)
 
-        baseline_dps = baseline[1] if baseline else None
-        for i, (name, mean, *_) in enumerate(items):
-            table.setItem(i, 0, QtWidgets.QTableWidgetItem(name))
-            table.setItem(i, 1, QtWidgets.QTableWidgetItem(f"{mean:,.2f}"))
+        baseline_dps = baseline.dps if baseline else None
+        for i, res in enumerate(items):
+            display_name = res.label
+            if res.label in self.combo_meta:
+                item = self.combo_meta[res.label]
+                display_name = f"{item.name or f'ID {item.item_id}'} ({item.slot.replace('_',' ').title()})"
+            
+            table.setItem(i, 0, QtWidgets.QTableWidgetItem(display_name))
+            table.setItem(i, 1, QtWidgets.QTableWidgetItem(f"{res.dps:,.2f}"))
             if baseline_dps is not None:
-                diff = mean - baseline_dps
+                diff = res.dps - baseline_dps
                 diff_item = QtWidgets.QTableWidgetItem(f"{diff:+,.2f}")
                 diff_item.setForeground(
                     QtGui.QColor("#00c000") if diff >= 0 else QtGui.QColor("#e03030")
