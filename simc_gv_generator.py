@@ -20,6 +20,15 @@ GEAR_SLOTS = frozenset({
     "main_hand", "off_hand",
 })
 
+# Common slot aliases seen in addon exports or hand-edited SimC strings.
+SLOT_ALIASES = {
+    "wrists": "wrist",
+    "shoulders": "shoulder",
+    "waists": "waist",
+    "mainhand": "main_hand",
+    "offhand": "off_hand",
+}
+
 # Paired slot base name -> (slot1, slot2)
 PAIRED_SLOTS = {
     "finger": ("finger1", "finger2"),
@@ -232,7 +241,9 @@ def parse_simc_addon(text: str) -> ParseResult:
 
 def _extract_slot(line: str) -> Optional[str]:
     m = re.match(r"(\w+)=", line)
-    return m.group(1) if m else None
+    if not m:
+        return None
+    return SLOT_ALIASES.get(m.group(1), m.group(1))
 
 
 def _parse_item_string(

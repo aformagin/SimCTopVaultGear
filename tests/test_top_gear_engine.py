@@ -199,6 +199,30 @@ class TestRunTopGearMode:
         with pytest.raises(ValueError, match="Too many combinations"):
             run_top_gear(sample_text, config)
 
+    def test_invalid_selected_items_raise_clear_error(self, sample_text):
+        parsed = parse_simc_addon(sample_text)
+        bad_item = parsed.bag_items[0]
+        config = TopGearConfig(
+            simc_executable="/fake/simc",
+            options=SimOptions(target_error=0.5),
+            mode="top_gear",
+            selected_bag_items=[bad_item],
+            max_combinations=10,
+        )
+
+        def fake_run(simc_input, *_args, **_kwargs):
+            if 'profileset."check"+=' in simc_input:
+                raise RuntimeError(
+                    "simc produced no JSON output. stderr: "
+                    "Error: Profileset 'check': Player 'Gotmilkferya': "
+                    "Item 'voidlashed_hood' Slot 'head': Invalid type."
+                )
+            raise RuntimeError("simc produced no JSON output. stderr: startup noise")
+
+        with patch("top_gear_engine.run_simc_with_input", side_effect=fake_run):
+            with pytest.raises(RuntimeError, match="Selected items are incompatible"):
+                run_top_gear(sample_text, config)
+
 
 # ---------------------------------------------------------------------------
 # run_top_gear — empty alternatives

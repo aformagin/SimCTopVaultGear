@@ -9,6 +9,11 @@ from simc_gv_generator import parse_simc_addon
 from profileset_generator import SimOptions, count_top_gear_combinations
 from top_gear_engine import run_top_gear, TopGearConfig, run_simc_with_input
 from result_parser import parse_results
+from item_filters import (
+    load_equippable_item_metadata,
+    is_item_armor_compatible,
+    is_raw_item_armor_compatible,
+)
 from drop_finder_engine import (
     load_drop_sources,
     get_instances,
@@ -228,12 +233,17 @@ class MainWindow(QtWidgets.QMainWindow):
         # Shared parse state
         self._parse_result = None
         self._tg_bag_items = []
+        self._tg_filtered_items = []
 
         # Real Drop Finder (Droptimizer) state
         try:
             self._dfe_sources = load_drop_sources()
         except FileNotFoundError:
             self._dfe_sources = None
+        try:
+            self._item_metadata = load_equippable_item_metadata()
+        except FileNotFoundError:
+            self._item_metadata = None
         self._dfe_raw_items = []   # raw dicts from drop_sources.json
         self._dfe_items = []       # ParsedItem list for the current selection
 
@@ -332,6 +342,75 @@ class MainWindow(QtWidgets.QMainWindow):
         gl.addLayout(exe_row)
 
         layout.addWidget(group)
+
+    def _make_status_label(self, text: str = ""):
+        label = QtWidgets.QLabel(text)
+        label.setStyleSheet("color: #888888; font-size: 8pt;")
+        label.setWordWrap(True)
+        label.setMinimumWidth(0)
+        label.setSizePolicy(QtWidgets.QSizePolicy.Ignored, QtWidgets.QSizePolicy.Preferred)
+        return label
+
+    def _make_log_button(self):
+        btn = QtWidgets.QPushButton("Open Log")
+        btn.setStyleSheet(BTN_BLUE)
+        btn.setFixedHeight(30)
+        btn.hide()
+        btn.clicked.connect(self._open_latest_log)
+        return btn
+
+    def _build_footer_row(self, layout, initial_text: str, action_buttons: list):
+        bottom = QtWidgets.QHBoxLayout()
+        status_label = self._make_status_label(initial_text)
+        log_button = self._make_log_button()
+        status_label.setProperty("log_button", log_button)
+        bottom.addWidget(status_label, 1)
+        bottom.addWidget(log_button)
+        for button in action_buttons:
+            bottom.addWidget(button)
+        layout.addLayout(bottom)
+        return status_label, log_button
+
+    def _set_status_text(self, label, text: str):
+        label.setText(text)
+        label.setToolTip("")
+        log_button = label.property("log_button")
+        if log_button is not None:
+            log_button.hide()
+
+    def _write_latest_log(self, message: str):
+        path = os.path.join(os.path.abspath("."), "latest_log.txt")
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(message.rstrip() + "\n")
+        return path
+
+    def _open_latest_log(self):
+        path = os.path.join(os.path.abspath("."), "latest_log.txt")
+        if os.path.exists(path):
+            QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(path))
+
+    def _summarize_error(self, message: str, max_len: int = 110) -> str:
+        lines = [line.strip() for line in message.splitlines() if line.strip()]
+        error_lines = [line for line in lines if "Error:" in line or "Parse error:" in line]
+        summary = error_lines[-1] if error_lines else (lines[-1] if lines else "Unknown error")
+        if summary.startswith("Error: "):
+            summary = summary[7:]
+        if len(summary) > max_len:
+            summary = summary[: max_len - 3].rstrip() + "..."
+        return summary
+
+    def _set_error_status(self, label, message: str):
+        log_path = self._write_latest_log(message)
+        summary = self._summarize_error(message)
+        label.setText(f"Error: {summary}  (see {os.path.basename(log_path)})")
+        label.setToolTip(message)
+        log_button = label.property("log_button")
+        if log_button is not None:
+            log_button.show()
+
+    def _set_buttons_enabled(self, buttons: list, enabled: bool):
+        for button in buttons:
+            button.setEnabled(enabled)
 
     # -- Reusable widget factories -------------------------------------------
 
@@ -452,10 +531,13 @@ class MainWindow(QtWidgets.QMainWindow):
         self.detailsBtn.setIcon(
             self.style().standardIcon(QtWidgets.QStyle.SP_MessageBoxInformation)
         )
+        btn_v = QtWidgets.QVBoxLayout()
+        btn_v.addWidget(QtWidgets.QLabel(""))   # blank label matches the "Best Item" / "Estimated DPS" labels
+        btn_v.addWidget(self.detailsBtn)
 
         results_h.addLayout(best_v, 2)
         results_h.addLayout(dps_v, 1)
-        results_h.addWidget(self.detailsBtn, 0, QtCore.Qt.AlignVCenter)
+        results_h.addLayout(btn_v, 0)
         layout.addWidget(results_group)
 
         self.runSimBtn = QtWidgets.QPushButton("Run Gear Sim")
@@ -549,22 +631,17 @@ class MainWindow(QtWidgets.QMainWindow):
 
         splitter.setSizes([240, 590])
 
-        # ---- Bottom controls ----
-        bottom = QtWidgets.QHBoxLayout()
-        self.dfe_status_label = QtWidgets.QLabel(
-            "(no drop_sources.json found)" if self._dfe_sources is None else ""
-        )
-        self.dfe_status_label.setStyleSheet("color: #888888; font-size: 8pt;")
         self.dfe_refresh_btn = QtWidgets.QPushButton("Refresh Items")
         self.dfe_refresh_btn.setStyleSheet(BTN_BLUE)
         self.dfe_run_btn = QtWidgets.QPushButton("Run Drop Finder")
         self.dfe_run_btn.setStyleSheet(BTN_GREEN)
         self.dfe_run_btn.setFixedHeight(30)
         self.dfe_run_btn.setEnabled(self._dfe_sources is not None)
-        bottom.addWidget(self.dfe_status_label, 1)
-        bottom.addWidget(self.dfe_refresh_btn)
-        bottom.addWidget(self.dfe_run_btn)
-        layout.addLayout(bottom)
+        self.dfe_status_label, self.dfe_log_btn = self._build_footer_row(
+            layout,
+            "(no drop_sources.json found)" if self._dfe_sources is None else "",
+            [self.dfe_refresh_btn, self.dfe_run_btn],
+        )
 
     # -- Top Gear tab --------------------------------------------------------
 
@@ -578,6 +655,26 @@ class MainWindow(QtWidgets.QMainWindow):
         (opts_group, self.tg_fight_combo, self.tg_terror_spin,
          self.tg_threads_spin, self.tg_maxtime_spin) = self._make_options_group("tg")
         layout.addWidget(opts_group)
+
+        # ---- Filters ----
+        filter_row = QtWidgets.QHBoxLayout()
+        filter_row.setSpacing(6)
+        filter_row.addWidget(QtWidgets.QLabel("Min ilvl:"))
+        self.tg_ilvl_combo = QtWidgets.QComboBox()
+        self.tg_ilvl_combo.setFixedWidth(185)
+        for label, val in [
+            ("No filter", 0),
+            ("246+  (LFR)", 246),
+            ("250+  (Champion M+)", 250),
+            ("259+  (Normal Raid)", 259),
+            ("263+  (Hero M+)", 263),
+            ("272+  (Heroic Raid)", 272),
+            ("276+  (Myth M+)", 276),
+        ]:
+            self.tg_ilvl_combo.addItem(label, userData=val)
+        filter_row.addWidget(self.tg_ilvl_combo)
+        filter_row.addStretch()
+        layout.addLayout(filter_row)
 
         splitter = QtWidgets.QSplitter(QtCore.Qt.Horizontal)
         layout.addWidget(splitter, 1)
@@ -623,18 +720,16 @@ class MainWindow(QtWidgets.QMainWindow):
 
         splitter.setSizes([240, 590])
 
-        bottom = QtWidgets.QHBoxLayout()
-        self.tg_status_label = QtWidgets.QLabel("")
-        self.tg_status_label.setStyleSheet("color: #888888; font-size: 8pt;")
         self.tg_parse_btn = QtWidgets.QPushButton("Parse Import")
         self.tg_parse_btn.setStyleSheet(BTN_BLUE)
         self.tg_run_btn = QtWidgets.QPushButton("Run Top Gear")
         self.tg_run_btn.setStyleSheet(BTN_GREEN)
         self.tg_run_btn.setFixedHeight(30)
-        bottom.addWidget(self.tg_status_label, 1)
-        bottom.addWidget(self.tg_parse_btn)
-        bottom.addWidget(self.tg_run_btn)
-        layout.addLayout(bottom)
+        self.tg_status_label, self.tg_log_btn = self._build_footer_row(
+            layout,
+            "",
+            [self.tg_parse_btn, self.tg_run_btn],
+        )
 
     # -----------------------------------------------------------------------
     # Signal connections
@@ -677,6 +772,7 @@ class MainWindow(QtWidgets.QMainWindow):
             lambda: self._set_all_checked(self.tg_bag_list, False)
         )
         self.tg_bag_list.itemChanged.connect(self._update_combo_count)
+        self.tg_ilvl_combo.currentIndexChanged.connect(self._apply_tg_filters)
 
     # -----------------------------------------------------------------------
     # Frameless window drag
@@ -880,6 +976,13 @@ class MainWindow(QtWidgets.QMainWindow):
             encounter_id=enc_id,
             character_class=char_class,
         )
+        if char_class:
+            armor_slots = {"head", "shoulder", "chest", "wrist", "hands", "waist", "legs", "feet"}
+            self._dfe_raw_items = [
+                raw for raw in self._dfe_raw_items
+                if raw.get("slot") not in armor_slots
+                or is_raw_item_armor_compatible(raw, char_class, self._item_metadata)
+            ]
 
         self.dfe_item_list.blockSignals(True)
         self.dfe_item_list.clear()
@@ -894,24 +997,24 @@ class MainWindow(QtWidgets.QMainWindow):
 
         n = len(self._dfe_raw_items)
         cls_str = f" [{char_class}]" if char_class else ""
-        self.dfe_status_label.setText(f"{n} item(s) loaded{cls_str}")
+        self._set_status_text(self.dfe_status_label, f"{n} item(s) loaded{cls_str}")
 
     def _run_droptimizer(self):
         text = self._get_import_text()
         if not text:
-            self.dfe_status_label.setText("Paste an import string first.")
+            self._set_status_text(self.dfe_status_label, "Paste an import string first.")
             return
         if not self._dfe_raw_items:
-            self.dfe_status_label.setText("Select a dungeon/raid and click Refresh Items.")
+            self._set_status_text(self.dfe_status_label, "Select a dungeon/raid and click Refresh Items.")
             return
         exe = self._get_simc_exe()
         if not exe:
-            self.dfe_status_label.setText("simc executable not found.")
+            self._set_status_text(self.dfe_status_label, "simc executable not found.")
             return
 
         ilvl = self.dfe_track_combo.currentData()
         if ilvl is None:
-            self.dfe_status_label.setText("Select a track (ilvl) first.")
+            self._set_status_text(self.dfe_status_label, "Select a track (ilvl) first.")
             return
 
         # Collect selected items
@@ -921,7 +1024,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 selected_raw.append(self._dfe_raw_items[i])
 
         if not selected_raw:
-            self.dfe_status_label.setText("No items selected.")
+            self._set_status_text(self.dfe_status_label, "No items selected.")
             return
 
         parsed_items = loot_items_to_parsed(selected_raw, ilvl)
@@ -931,11 +1034,11 @@ class MainWindow(QtWidgets.QMainWindow):
         )
 
         inst_name = self.dfe_instance_combo.currentText()
-        self.dfe_status_label.setText(
+        self._set_status_text(
+            self.dfe_status_label,
             f"Running Drop Finder for {inst_name}  ({len(parsed_items)} items, ilvl {ilvl})…"
         )
-        self.dfe_run_btn.setEnabled(False)
-        self.dfe_refresh_btn.setEnabled(False)
+        self._set_buttons_enabled([self.dfe_run_btn, self.dfe_refresh_btn], False)
 
         worker = DroptimizerWorker(text, parsed_items, options, exe)
         worker.signals.finished.connect(self._dfe_on_finished)
@@ -951,14 +1054,12 @@ class MainWindow(QtWidgets.QMainWindow):
             label_map[label] = f"{name}  ({slot})"
         self._fill_results_table(self.dfe_results_table, sim_results, label_map)
         n = len([r for r in sim_results if r.label != "Baseline"])
-        self.dfe_status_label.setText(f"Done  —  {n} item(s) ranked")
-        self.dfe_run_btn.setEnabled(True)
-        self.dfe_refresh_btn.setEnabled(True)
+        self._set_status_text(self.dfe_status_label, f"Done  —  {n} item(s) ranked")
+        self._set_buttons_enabled([self.dfe_run_btn, self.dfe_refresh_btn], True)
 
     def _dfe_on_error(self, msg):
-        self.dfe_status_label.setText(f"Error: {msg}")
-        self.dfe_run_btn.setEnabled(True)
-        self.dfe_refresh_btn.setEnabled(True)
+        self._set_error_status(self.dfe_status_label, msg)
+        self._set_buttons_enabled([self.dfe_run_btn, self.dfe_refresh_btn], True)
 
     # -----------------------------------------------------------------------
     # Great Vault tab logic
@@ -1061,29 +1162,67 @@ class MainWindow(QtWidgets.QMainWindow):
     # Top Gear tab logic
     # -----------------------------------------------------------------------
 
+    # Slots that are incompatible with certain classes.
+    # Only covers cases determinable without an item database lookup.
+    _CLASS_SLOT_EXCLUSIONS = {
+        "hunter": {"off_hand"},          # hunters use a 2H ranged weapon
+        "demonhunter": set(),            # DH can use off_hand warglaives
+        "evoker": set(),
+    }
+
+    def _apply_tg_filters(self):
+        """Apply ilvl and compatibility filters, repopulate bag list, refresh combo count."""
+        min_ilvl = self.tg_ilvl_combo.currentData() or 0
+        char_class = (
+            self._parse_result.character_class if self._parse_result else None
+        )
+        excluded_slots = self._CLASS_SLOT_EXCLUSIONS.get(char_class, set()) if char_class else set()
+
+        filtered = []
+        for item in self._tg_bag_items:
+            if min_ilvl > 0 and item.ilevel < min_ilvl:
+                continue
+            if item.slot in excluded_slots:
+                continue
+            if not is_item_armor_compatible(
+                item, char_class, self._item_metadata
+            ):
+                continue
+            filtered.append(item)
+
+        self._tg_filtered_items = filtered
+        self.tg_bag_list.blockSignals(True)
+        self._populate_bag_list(self.tg_bag_list, self._tg_filtered_items)
+        self.tg_bag_list.blockSignals(False)
+        self._update_combo_count()
+
     def _parse_for_top_gear(self):
         text = self._get_import_text()
         if not text:
-            self.tg_status_label.setText("Paste an import string first.")
+            self._set_status_text(self.tg_status_label, "Paste an import string first.")
             return
         try:
             self._parse_result = parse_simc_addon(text)
             self._tg_bag_items = list(self._parse_result.bag_items)
-            self.tg_bag_list.blockSignals(True)
-            self._populate_bag_list(self.tg_bag_list, self._tg_bag_items)
-            self.tg_bag_list.blockSignals(False)
-            n = len(self._tg_bag_items)
+            self._apply_tg_filters()
+            total = len(self._tg_bag_items)
+            shown = len(self._tg_filtered_items)
             char = self._parse_result.character_name
-            self.tg_status_label.setText(f"Parsed: {char}  —  {n} bag item(s) loaded")
-            self._update_combo_count()
+            note = f"  ({total - shown} filtered out)" if shown < total else ""
+            self._set_status_text(
+                self.tg_status_label,
+                f"Parsed: {char}  —  {shown} bag item(s) shown{note}"
+            )
         except Exception as exc:
-            self.tg_status_label.setText(f"Parse error: {exc}")
+            import traceback
+            traceback.print_exc()
+            self._set_error_status(self.tg_status_label, f"Parse error: {exc}")
 
     def _update_combo_count(self):
-        if not self._parse_result or not self._tg_bag_items:
+        if not self._parse_result or not self._tg_filtered_items:
             self.tg_combo_label.setText("Combinations: —")
             return
-        selected = self._get_selected_bag_items(self.tg_bag_list, self._tg_bag_items)
+        selected = self._get_selected_bag_items(self.tg_bag_list, self._tg_filtered_items)
         count = count_top_gear_combinations(
             self._parse_result, selected_bag_items=selected
         )
@@ -1102,18 +1241,18 @@ class MainWindow(QtWidgets.QMainWindow):
     def _run_top_gear(self):
         text = self._get_import_text()
         if not text:
-            self.tg_status_label.setText("Paste an import string first.")
+            self._set_status_text(self.tg_status_label, "Paste an import string first.")
             return
         if not self._tg_bag_items:
-            self.tg_status_label.setText("Parse the import string first.")
+            self._set_status_text(self.tg_status_label, "Parse the import string first.")
             return
         exe = self._get_simc_exe()
         if not exe:
-            self.tg_status_label.setText("simc executable not found — browse to set its path.")
+            self._set_status_text(self.tg_status_label, "simc executable not found — browse to set its path.")
             return
-        selected = self._get_selected_bag_items(self.tg_bag_list, self._tg_bag_items)
+        selected = self._get_selected_bag_items(self.tg_bag_list, self._tg_filtered_items)
         if not selected:
-            self.tg_status_label.setText("No items selected.")
+            self._set_status_text(self.tg_status_label, "No items selected.")
             return
 
         MAX_COMBOS = 50_000
@@ -1121,7 +1260,8 @@ class MainWindow(QtWidgets.QMainWindow):
             self._parse_result, selected_bag_items=selected
         )
         if count > MAX_COMBOS:
-            self.tg_status_label.setText(
+            self._set_status_text(
+                self.tg_status_label,
                 f"Too many combinations ({count:,} > {MAX_COMBOS:,}).  Deselect some items."
             )
             return
@@ -1137,9 +1277,8 @@ class MainWindow(QtWidgets.QMainWindow):
             selected_bag_items=selected,
             max_combinations=MAX_COMBOS,
         )
-        self.tg_status_label.setText(f"Running Top Gear  —  {count:,} combination(s)…")
-        self.tg_run_btn.setEnabled(False)
-        self.tg_parse_btn.setEnabled(False)
+        self._set_status_text(self.tg_status_label, f"Running Top Gear  —  {count:,} combination(s)…")
+        self._set_buttons_enabled([self.tg_run_btn, self.tg_parse_btn], False)
 
         worker = TopGearWorker(text, config)
         worker.signals.finished.connect(self._tg_on_finished)
@@ -1158,14 +1297,12 @@ class MainWindow(QtWidgets.QMainWindow):
             label_map[label] = display
         self._fill_results_table(self.tg_results_table, sim_results, label_map)
         n = len([r for r in sim_results if r.label != "Baseline"])
-        self.tg_status_label.setText(f"Done  —  {n} combination(s) ranked")
-        self.tg_run_btn.setEnabled(True)
-        self.tg_parse_btn.setEnabled(True)
+        self._set_status_text(self.tg_status_label, f"Done  —  {n} combination(s) ranked")
+        self._set_buttons_enabled([self.tg_run_btn, self.tg_parse_btn], True)
 
     def _tg_on_error(self, msg):
-        self.tg_status_label.setText(f"Error: {msg}")
-        self.tg_run_btn.setEnabled(True)
-        self.tg_parse_btn.setEnabled(True)
+        self._set_error_status(self.tg_status_label, msg)
+        self._set_buttons_enabled([self.tg_run_btn, self.tg_parse_btn], True)
 
 
 # ---------------------------------------------------------------------------

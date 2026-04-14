@@ -12,6 +12,7 @@ process per item: all alternatives are evaluated in a single simc run.
 """
 import json
 import os
+import re
 import subprocess
 import tempfile
 from dataclasses import dataclass, field
@@ -37,6 +38,48 @@ class TopGearConfig:
     timeout: int = 600                  # simc hard timeout in seconds
 
 
+def _normalize_item_name(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "", name.lower())
+
+
+def _extract_invalid_item_name(error_text: str) -> Optional[str]:
+    m = re.search(r"Item '([^']+)'.*Invalid type", error_text)
+    if not m:
+        return None
+    return m.group(1)
+
+
+def _diagnose_invalid_items(
+    parse_result: ParseResult,
+    simc_executable: str,
+    bag_items: list,
+    timeout: int,
+) -> list:
+    """Return selected bag items that the current simc build rejects."""
+    if not bag_items:
+        return []
+
+    base = "\n".join(parse_result.base_profile_lines)
+    invalid = []
+
+    for item in bag_items:
+        item_line = re.sub(r"^\w+=", f"{item.slot}=", item.simc_string)
+        simc_input = base + f'\n\nprofileset."check"+={item_line}\n'
+        try:
+            run_simc_with_input(simc_input, simc_executable, timeout=min(timeout, 60))
+        except RuntimeError as exc:
+            bad_name = _extract_invalid_item_name(str(exc))
+            if bad_name is None:
+                raise
+            normalized_bad = _normalize_item_name(bad_name)
+            normalized_item = _normalize_item_name(item.name or "")
+            if normalized_item and normalized_bad != normalized_item:
+                raise
+            invalid.append(item)
+
+    return invalid
+
+
 def run_top_gear(
     simc_text: str,
     config: TopGearConfig,
@@ -55,28 +98,53 @@ def run_top_gear(
     """
     # Step 1 – parse
     parse_result = parse_simc_addon(simc_text)
+    selected_items = config.selected_bag_items if config.selected_bag_items is not None else parse_result.bag_items
+
+    if config.mode == "top_gear":
+        count = count_top_gear_combinations(parse_result, selected_bag_items=selected_items)
+        if count > config.max_combinations:
+            raise ValueError(
+                f"Too many combinations: {count} > {config.max_combinations}. "
+                "Reduce selected items or increase max_combinations."
+            )
 
     # Step 2 – generate profileset input
     if config.mode == "top_gear":
         simc_input, combo_metadata = generate_top_gear_input(
             parse_result,
             options=config.options,
-            selected_bag_items=config.selected_bag_items,
+            selected_bag_items=selected_items,
             max_combinations=config.max_combinations,
         )
     else:
-        bag_items = config.selected_bag_items  # None → all
         simc_input, combo_metadata = generate_drop_finder_input(
             parse_result,
             config.options,
-            bag_items=bag_items,
+            bag_items=selected_items,
         )
 
     if not combo_metadata:
         return parse_result, [], combo_metadata
 
     # Step 3 – run simc
-    json_data = run_simc_with_input(simc_input, config.simc_executable, config.timeout)
+    try:
+        json_data = run_simc_with_input(simc_input, config.simc_executable, config.timeout)
+    except RuntimeError as exc:
+        invalid_items = _diagnose_invalid_items(
+            parse_result,
+            config.simc_executable,
+            selected_items,
+            config.timeout,
+        )
+        if not invalid_items:
+            raise
+        summary = ", ".join(f"{item.name or item.item_id} ({item.item_id})" for item in invalid_items[:5])
+        if len(invalid_items) > 5:
+            summary += f", +{len(invalid_items) - 5} more"
+        raise RuntimeError(
+            "Selected items are incompatible with the current SimulationCraft build: "
+            f"{summary}. Update simc.exe or deselect these items."
+        ) from exc
 
     # Step 4 – parse results
     sim_results = parse_results(json_data)

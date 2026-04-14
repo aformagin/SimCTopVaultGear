@@ -244,6 +244,12 @@ class TestHelpers:
         assert "id=193708" in result
         assert "bonus_id=123" in result
 
+    def test_reslot_item_canonicalizes_alias_via_target_slot(self):
+        original = "wrists=fallen_kings_cuffs,id=249304,bonus_id=123"
+        result = _reslot_item(original, "wrist")
+        assert result.startswith("wrist=")
+        assert "id=249304" in result
+
     def test_unique_label_no_conflict(self):
         existing = {}
         result = _unique_label("my_label", existing)

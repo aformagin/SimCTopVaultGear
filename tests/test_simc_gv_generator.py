@@ -181,6 +181,20 @@ class TestBagItems:
         # At least some uids should be unique (most items differ)
         assert len(set(uids)) > 1
 
+    def test_plural_wrist_alias_is_canonicalized(self):
+        text = """druid="Tester"
+spec=balance
+talents=CYGAAAAAAAAAAAAAAAAAAAAA
+### Gear from Bags
+# Fallen King's Cuffs (262)
+# wrists=fallen_kings_cuffs,id=249304,bonus_id=6652
+"""
+        parsed = parse_simc_addon(text)
+        assert len(parsed.bag_items) == 1
+        item = parsed.bag_items[0]
+        assert item.slot == "wrist"
+        assert item.item_id == 249304
+
 
 # ---------------------------------------------------------------------------
 # Additional character info

@@ -198,6 +198,10 @@ def _build_physical_slot_alternatives(bag_items: list, equipped: dict) -> dict:
     for item in bag_items:
         target_slots = _resolve_target_slots(item.slot, item, equipped)
         for ts in target_slots:
+            if ts not in GEAR_SLOTS:
+                raise ValueError(
+                    f"Unsupported gear slot '{item.slot}' for item '{item.name or item.item_id}'."
+                )
             if ts not in slot_alts:
                 slot_alts[ts] = []
             # Avoid exact duplicates within the same slot
@@ -229,8 +233,18 @@ def _resolve_target_slots(slot: str, item: ParsedItem, equipped: dict) -> list:
 
 
 def _reslot_item(simc_string: str, target_slot: str) -> str:
-    """Replace the slot name prefix in a simc item string."""
-    return re.sub(r"^\w+=", f"{target_slot}=", simc_string)
+    """Replace the slot name prefix in a simc item string and strip any inline
+    item name so simc resolves the item by ID only.
+
+    e.g. 'wrists=fallen_kings_cuffs,id=12345,bonus_id=...'
+      -> 'wrist=,id=12345,bonus_id=...'
+
+    ID-based lookup is always reliable; name-based lookup can fail for items not
+    yet fully indexed in the running simc build.
+    """
+    reslotted = re.sub(r"^\w+=", f"{target_slot}=", simc_string)
+    # Strip inline name: slot=name,... -> slot=,...  (no-op when name already empty)
+    return re.sub(r"^(\w+=)\w+,", r"\1,", reslotted)
 
 
 def _make_label(name: str, slot: str) -> str:
