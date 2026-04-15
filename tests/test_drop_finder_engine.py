@@ -358,6 +358,20 @@ class TestGenerateDroptimizer:
         assert "enchant_id=7968" in simc_input
         assert "gem_id=240891" in simc_input
 
+    def test_combo_meta_tracks_target_slots_for_paired_items(self, sample_text):
+        from simc_gv_generator import parse_simc_addon
+
+        raw = [{"id": 999, "name": "Magic Trinket", "slot": "trinket1", "class_mask": -1}]
+        parsed_items = loot_items_to_parsed(raw, ilvl=250)
+        parse_result = parse_simc_addon(sample_text)
+
+        _, combo_meta = generate_droptimizer_input(
+            parse_result, parsed_items, SimOptions()
+        )
+
+        target_slots = {target_slot for _, target_slot in combo_meta.values()}
+        assert target_slots == {"trinket1", "trinket2"}
+
 
 # ---------------------------------------------------------------------------
 # load_drop_sources (integration with real file)

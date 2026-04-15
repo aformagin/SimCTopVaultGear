@@ -1047,9 +1047,9 @@ class MainWindow(QtWidgets.QMainWindow):
     def _dfe_on_finished(self, result):
         _, sim_results, combo_meta = result
         label_map = {}
-        for label, item in combo_meta.items():
+        for label, (item, target_slot) in combo_meta.items():
             name = item.name or f"ID {item.item_id}"
-            slot = item.slot.replace("_", " ").title()
+            slot = target_slot.replace("_", " ").title()
             label_map[label] = f"{name}  ({slot})"
         self._fill_results_table(self.dfe_results_table, sim_results, label_map)
         n = len([r for r in sim_results if r.label != "Baseline"])

@@ -113,8 +113,9 @@ class TestDropFinderInput:
 
     def test_meta_items_have_positive_ids(self, parsed, options):
         _, meta = generate_drop_finder_input(parsed, options)
-        for label, item in meta.items():
+        for label, (item, target_slot) in meta.items():
             assert item.item_id > 0
+            assert target_slot
 
     def test_baseline_character_in_output(self, parsed, options):
         simc_input, _ = generate_drop_finder_input(parsed, options)

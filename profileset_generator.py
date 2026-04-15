@@ -72,7 +72,7 @@ def generate_drop_finder_input(
 
     Returns:
         (simc_input_string, combo_metadata)
-        combo_metadata: {profileset_label -> ParsedItem}
+        combo_metadata: {profileset_label -> (ParsedItem, target_slot)}
     """
     if options is None:
         options = SimOptions()
@@ -95,7 +95,7 @@ def generate_drop_finder_input(
             # Ensure label uniqueness
             label = _unique_label(label, combo_metadata)
             profileset_lines.append(f'profileset."{label}"+={gear_str}')
-            combo_metadata[label] = bag_item
+            combo_metadata[label] = (bag_item, target_slot)
 
     if not profileset_lines:
         return base, combo_metadata
