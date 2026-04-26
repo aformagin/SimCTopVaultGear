@@ -1,5 +1,7 @@
 import sys
 import os
+import tempfile
+import traceback
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QThreadPool, QRunnable, pyqtSignal, QObject
 
@@ -363,15 +365,27 @@ class MainWindow(QtWidgets.QMainWindow):
             log_button.hide()
 
     def _write_latest_log(self, message: str):
-        path = os.path.join(os.path.abspath("."), "latest_log.txt")
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(message.rstrip() + "\n")
-        return path
+        candidate_dirs = [
+            os.path.abspath("."),
+            tempfile.gettempdir(),
+        ]
+        last_error = None
+        for directory in candidate_dirs:
+            path = os.path.join(directory, "latest_log.txt")
+            try:
+                with open(path, "w", encoding="utf-8") as f:
+                    f.write(message.rstrip() + "\n")
+                return path
+            except OSError as exc:
+                last_error = exc
+        raise RuntimeError(f"Could not write latest_log.txt: {last_error}") from last_error
 
     def _open_latest_log(self):
-        path = os.path.join(os.path.abspath("."), "latest_log.txt")
-        if os.path.exists(path):
-            QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(path))
+        for directory in (os.path.abspath("."), tempfile.gettempdir()):
+            path = os.path.join(directory, "latest_log.txt")
+            if os.path.exists(path):
+                QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(path))
+                return
 
     def _summarize_error(self, message: str, max_len: int = 110) -> str:
         lines = [line.strip() for line in message.splitlines() if line.strip()]
@@ -384,13 +398,19 @@ class MainWindow(QtWidgets.QMainWindow):
         return summary
 
     def _set_error_status(self, label, message: str):
-        log_path = self._write_latest_log(message)
         summary = self._summarize_error(message)
-        label.setText(f"Error: {summary}  (see {os.path.basename(log_path)})")
+        try:
+            log_path = self._write_latest_log(message)
+            label.setText(f"Error: {summary}  (see {os.path.basename(log_path)})")
+            show_log_button = True
+        except Exception as exc:
+            label.setText(f"Error: {summary}")
+            message = f"{message}\n\nCould not write latest_log.txt: {exc}"
+            show_log_button = False
         label.setToolTip(message)
         log_button = label.property("log_button")
         if log_button is not None:
-            log_button.show()
+            log_button.setVisible(show_log_button)
 
     def _set_buttons_enabled(self, buttons: list, enabled: bool):
         for button in buttons:
@@ -659,7 +679,7 @@ class MainWindow(QtWidgets.QMainWindow):
             ("263+  (Hero M+)", 263),
             ("272+  (Heroic Raid)", 272),
             ("276+  (Myth M+)", 276),
-            ("298+  (Voidcore Modified)", 298),
+            ("298+  (Voidforged)", 298),
         ]:
             self.tg_ilvl_combo.addItem(label, userData=val)
         filter_row.addWidget(self.tg_ilvl_combo)
@@ -1047,10 +1067,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def _dfe_on_finished(self, result):
         _, sim_results, combo_meta = result
         label_map = {}
-        for label, (item, target_slot) in combo_meta.items():
-            name = item.name or f"ID {item.item_id}"
-            slot = target_slot.replace("_", " ").title()
-            label_map[label] = f"{name}  ({slot})"
+        for label, entry in combo_meta.items():
+            label_map[label] = self._format_single_item_result_label(entry)
         self._fill_results_table(self.dfe_results_table, sim_results, label_map)
         n = len([r for r in sim_results if r.label != "Baseline"])
         self._set_status_text(self.dfe_status_label, f"Done  —  {n} item(s) ranked")
@@ -1155,8 +1173,7 @@ class MainWindow(QtWidgets.QMainWindow):
         if best:
             display_name = best.label
             if best.label in combo_meta:
-                item = combo_meta[best.label]
-                display_name = item.name or f"ID {item.item_id}"
+                display_name = self._format_single_item_result_label(combo_meta[best.label])
             self.bestItemLine.setText(display_name)
             self.estDPSLine.setText(f"{best.dps:,.2f}")
         else:
@@ -1202,8 +1219,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for i, res in enumerate(items):
             display_name = res.label
             if res.label in self.combo_meta:
-                item = self.combo_meta[res.label]
-                display_name = f"{item.name or f'ID {item.item_id}'} ({item.slot.replace('_',' ').title()})"
+                display_name = self._format_single_item_result_label(self.combo_meta[res.label])
             
             table.setItem(i, 0, QtWidgets.QTableWidgetItem(display_name))
             table.setItem(i, 1, QtWidgets.QTableWidgetItem(f"{res.dps:,.2f}"))
@@ -1218,6 +1234,17 @@ class MainWindow(QtWidgets.QMainWindow):
         table.resizeColumnsToContents()
         layout.addWidget(table)
         dialog.exec_()
+
+    def _format_single_item_result_label(self, combo_entry):
+        """Format a drop-finder / Great Vault result label from combo metadata."""
+        if isinstance(combo_entry, tuple):
+            item, target_slot = combo_entry
+        else:
+            item = combo_entry
+            target_slot = getattr(item, "slot", "")
+        name = item.name or f"ID {item.item_id}"
+        slot = target_slot.replace("_", " ").title() if target_slot else item.slot.replace("_", " ").title()
+        return f"{name}  ({slot})"
 
     # -----------------------------------------------------------------------
     # Top Gear tab logic
@@ -1371,7 +1398,39 @@ class MainWindow(QtWidgets.QMainWindow):
 # Entry point
 # ---------------------------------------------------------------------------
 
-app = QtWidgets.QApplication(sys.argv)
-window = MainWindow()
-window.show()
-app.exec()
+def _write_unhandled_exception(exc_type, exc_value, exc_traceback):
+    message = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+    candidate_dirs = [os.path.abspath("."), tempfile.gettempdir()]
+    for directory in candidate_dirs:
+        path = os.path.join(directory, "unhandled_exception.log")
+        try:
+            with open(path, "w", encoding="utf-8") as f:
+                f.write(message)
+            return path, message
+        except OSError:
+            continue
+    return None, message
+
+
+def _show_unhandled_exception(exc_type, exc_value, exc_traceback):
+    path, message = _write_unhandled_exception(exc_type, exc_value, exc_traceback)
+    app = QtWidgets.QApplication.instance()
+    if app is not None:
+        detail = f"\n\nSee {path}" if path else ""
+        QtWidgets.QMessageBox.critical(
+            None,
+            "Unhandled Error",
+            f"{exc_value}{detail}",
+        )
+    else:
+        sys.__excepthook__(exc_type, exc_value, exc_traceback)
+    if path is None:
+        sys.stderr.write(message)
+
+
+if __name__ == "__main__":
+    sys.excepthook = _show_unhandled_exception
+    app = QtWidgets.QApplication(sys.argv)
+    window = MainWindow()
+    window.show()
+    app.exec()

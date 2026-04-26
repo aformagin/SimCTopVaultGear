@@ -92,6 +92,37 @@ class TestRunSimcWithInput:
             with pytest.raises(RuntimeError, match="no JSON output"):
                 run_simc_with_input("some input", "/fake/simc")
 
+    def test_talent_hash_error_is_actionable(self):
+        mock_proc = MagicMock()
+        mock_proc.stderr = (
+            "Error: Initialization error: Player 'Thuunar': Hash "
+            "'C0PApei1JmYNvFfEFaN5bWuGKAMmxwCsAzwQDbAAYG2GzsNzwMmZYYmxYmxMzYGzwMzYGzghmBAAAAwMAAAMzMzAMzGCDzCYbAA': "
+            "Selected node 104095 en"
+        )
+        with patch("subprocess.run", return_value=mock_proc):
+            with pytest.raises(RuntimeError) as exc_info:
+                run_simc_with_input("some input", "/fake/simc")
+
+        message = str(exc_info.value)
+        assert "rejected the active talent string" in message
+        assert "Update simc.exe" in message
+        assert "selected node 104095" in message
+
+    def test_level_bounds_error_is_actionable(self):
+        mock_proc = MagicMock()
+        mock_proc.stderr = (
+            "Error: Option 'level' with value '90': Option 'level' with value "
+            "'90' not within valid boundaries [1..80]"
+        )
+        with patch("subprocess.run", return_value=mock_proc):
+            with pytest.raises(RuntimeError) as exc_info:
+                run_simc_with_input("some input", "/fake/simc")
+
+        message = str(exc_info.value)
+        assert "rejected character level 90" in message
+        assert "supports levels 1..80" in message
+        assert "matching your current WoW/SimC addon version" in message
+
     def test_whitespace_only_stdout_raises(self):
         with patch("subprocess.run", side_effect=_make_simc_run("   \n\t  ")):
             with pytest.raises(RuntimeError, match="no JSON output"):

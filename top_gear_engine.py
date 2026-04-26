@@ -89,6 +89,73 @@ def _extract_invalid_item_name(error_text: str) -> Optional[str]:
     return m.group(1)
 
 
+def _looks_like_talent_hash_error(error_text: str) -> bool:
+    return (
+        "Selected node" in error_text
+        and "Hash '" in error_text
+        and "Initialization error: Player" in error_text
+    )
+
+
+def _looks_like_level_bounds_error(error_text: str) -> bool:
+    return "Option 'level'" in error_text and "not within valid boundaries" in error_text
+
+
+def _looks_like_base_profile_error(error_text: str) -> bool:
+    return _looks_like_talent_hash_error(error_text) or _looks_like_level_bounds_error(error_text)
+
+
+def _format_simc_no_json_error(stderr: str) -> str:
+    stderr = stderr.strip()
+    if not stderr:
+        return "simc produced no JSON output. stderr: (no stderr)"
+
+    if _looks_like_talent_hash_error(stderr):
+        player_match = re.search(r"Player '([^']+)'", stderr)
+        hash_match = re.search(r"Hash '([^']+)'", stderr)
+        node_match = re.search(r"Selected node (\d+)", stderr)
+
+        parts = []
+        if player_match:
+            parts.append(f"player {player_match.group(1)}")
+        if node_match:
+            parts.append(f"selected node {node_match.group(1)}")
+        if hash_match:
+            parts.append(f"talent hash {hash_match.group(1)}")
+        detail = f" ({', '.join(parts)})" if parts else ""
+
+        return (
+            "simc produced no JSON output. SimulationCraft rejected the active "
+            f"talent string{detail}. Update simc.exe to a build that matches "
+            "your current WoW/SimC addon version, or export a different saved "
+            "talent loadout that SimulationCraft accepts."
+        )
+
+    level_match = re.search(
+        r"Option 'level' with value '([^']+)'.*valid boundaries \[([^\]]+)\]",
+        stderr,
+    )
+    if level_match:
+        return (
+            "simc produced no JSON output. SimulationCraft rejected character "
+            f"level {level_match.group(1)}; this simc build supports levels "
+            f"{level_match.group(2)}. Use a SimulationCraft build matching "
+            "your current WoW/SimC addon version, or export a character profile "
+            "compatible with the selected simc.exe."
+        )
+
+    error_lines = [
+        line.strip()
+        for line in stderr.splitlines()
+        if "Error:" in line or "Parse error:" in line
+    ]
+    if error_lines:
+        return f"simc produced no JSON output. {error_lines[-1]}"
+
+    snippet = stderr[-2000:]
+    return f"simc produced no JSON output. stderr: {snippet}"
+
+
 def _diagnose_invalid_items(
     parse_result: ParseResult,
     simc_executable: str,
@@ -170,6 +237,8 @@ def run_top_gear(
     try:
         json_data = run_simc_with_input(simc_input, config.simc_executable, config.timeout)
     except RuntimeError as exc:
+        if _looks_like_base_profile_error(str(exc)):
+            raise
         invalid_items = _diagnose_invalid_items(
             parse_result,
             config.simc_executable,
@@ -236,8 +305,7 @@ def run_simc_with_input(
             raw = ""
 
         if not raw.strip():
-            snippet = proc.stderr[-2000:] if proc.stderr else "(no stderr)"
-            raise RuntimeError(f"simc produced no JSON output. stderr: {snippet}")
+            raise RuntimeError(_format_simc_no_json_error(proc.stderr or ""))
 
         try:
             return json.loads(raw)
